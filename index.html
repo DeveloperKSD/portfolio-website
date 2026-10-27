@@ -83,37 +83,93 @@ const PROFILE = {
   resume: "resume.pdf"   // put your resume file next to index.html
 };
 
-const DOMAINS = ["AI / Agents", "Mobile", "CV / Privacy", "Full-Stack / DevOps"];
+const DOMAINS = ["AI / Agents", "Mobile", "CV / Privacy", "Full-Stack / DevOps", "Algorithms / Games"];
 
-// Badge colours for the tech stack
-const TECH = {Python:"#3776AB",Kotlin:"#7F52FF",TypeScript:"#3178C6",JavaScript:"#B8860B",Docker:"#2496ED",FastAPI:"#009688",Flask:"#444444",OpenCV:"#5C3EE8",Prometheus:"#E6522C",Grafana:"#F46800",React:"#2A9DBF","Node.js":"#4E8F3A"};
+// Badge colours for the tech stack (unlisted tech falls back to grey)
+const TECH = {Python:"#3776AB",Kotlin:"#7F52FF",TypeScript:"#3178C6",JavaScript:"#B8860B",Docker:"#2496ED",FastAPI:"#009688",Flask:"#444444",OpenCV:"#5C3EE8",Prometheus:"#E6522C",Grafana:"#F46800",React:"#2A9DBF","Node.js":"#4E8F3A",Express:"#555555",Vite:"#646CFF","Tailwind CSS":"#06B6D4",PostgreSQL:"#336791",MySQL:"#00758F",Gemini:"#8E75B2","Jetpack Compose":"#4285F4",BLE:"#0082FC",Nostr:"#8E44AD",Room:"#3DDC84",Ollama:"#333333",Qdrant:"#DC244C","scikit-learn":"#F7931E",Pygame:"#2E7D32",Textual:"#5A4FCF",Cloudflare:"#F38020",Supabase:"#3ECF8E",Groq:"#F55036","Chrome MV3":"#4285F4","Transformers.js":"#E8A317",pytest:"#0A9EDC","GitHub Actions":"#2088FF",NumPy:"#4D77CF",pandas:"#150458",Pydantic:"#E92063","Tree-sitter":"#4E8F3A",WebGPU:"#005A9C"};
 
-// links and images are optional: leave "" or [] to hide them
+// links and images are optional: leave "" or [] to hide them.  features = bullet list on the project page.
+// The first three projects are shown on the home page.
+const P = (id,title,domain,summary,details,stack,features,status="") => ({id,title,domain,summary,details,stack,features,status,github:"",linkedin:"",live:"",images:[]});
 const PROJECTS = [
- {id:"lexai", title:"LexAI", domain:"AI / Agents",
-  summary:"A chatbot that answers questions about Indian law in plain language.",
-  details:"Explain the problem, how retrieval and prompting work, and what you learned. Replace this text with your own write-up.",
-  stack:["Python","FastAPI"], github:"", linkedin:"", live:"", images:[]},
- {id:"cyberbullying", title:"Cyberbullying detection in Hinglish", domain:"AI / Agents",
-  summary:"Research on detecting abusive text that mixes Hindi and English.",
-  details:"Describe the dataset, the models you compared and the results.",
-  stack:["Python"], github:"", linkedin:"", live:"", images:[]},
- {id:"scanner", title:"Smart Document Scanner", domain:"CV / Privacy",
-  summary:"Scans photos of documents into clean pages using image processing and AI.",
-  details:"Group project for the AI course. Describe your part, the pipeline and the demo.",
-  stack:["Python","OpenCV"], github:"", linkedin:"", live:"", images:[]},
- {id:"observatory", title:"OS Observatory", domain:"Full-Stack / DevOps",
-  summary:"A dashboard that shows live system metrics, with Prometheus and Grafana behind it.",
-  details:"Describe the architecture, how it runs in Docker and how you stress-tested it.",
-  stack:["Python","Flask","Docker","Prometheus","Grafana"], github:"", linkedin:"", live:"", images:[]},
- {id:"tradenest", title:"Tradenest", domain:"Full-Stack / DevOps",
-  summary:"A wholesale marketplace for businesses, built for a hackathon.",
-  details:"Describe what the team built in the time you had and your role.",
-  stack:["TypeScript"], github:"", linkedin:"", live:"", images:[]},
- {id:"converter", title:"File converter extension", domain:"Full-Stack / DevOps",
-  summary:"A browser extension that converts images and documents without leaving the tab.",
-  details:"Describe supported formats and how conversion works.",
-  stack:["JavaScript"], github:"", linkedin:"", live:"", images:[]}
+ P("rasoi","Rasoi: household management agent","AI / Agents",
+  "An AI agent that plans meals and manages groceries around diet, allergies, pantry stock and budget.",
+  "Student project. An agent workflow turns preferences and pantry inventory into meal plans and grocery tasks, and asks a human before sensitive actions.",
+  ["Python","FastAPI","React","Vite","Tailwind CSS","PostgreSQL","Docker","Gemini"],
+  ["Meal plans from dietary preferences, allergies and budget","Pantry tracking, grocery lists and ingredient substitution with replanning","Human approval checkpoints for sensitive actions and failed transactions","Workflow checkpointing and recovery to avoid duplicate operations","Dashboard for agent decisions, progress and simulated failures"]),
+ P("privacy-agent","Privacy-preserving vision browser agent","CV / Privacy",
+  "A browser extension that redacts personal data from screenshots before an AI model decides the next click.",
+  "Student project. Sensitive text and people are detected and redacted on the device, and only the sanitised page context reaches the vision model.",
+  ["JavaScript","Python","FastAPI","Chrome MV3","Transformers.js","WebGPU","Ollama"],
+  ["Detects emails, phone numbers, card, Aadhaar and PAN details","On-device object detection (YOLOS-Tiny) blurs people in screenshots","Works with OpenAI-compatible models or local Ollama, plus an offline mock mode","Shows executed actions, redacted regions and latency in the extension"]),
+ P("relay","Relay: offline Bluetooth mesh messenger","Mobile",
+  "An Android messenger that works over a Bluetooth LE mesh without internet, or over Nostr when online.",
+  "Student project for Mobile App Development, focused on privacy and encrypted peer-to-peer communication.",
+  ["Kotlin","Jetpack Compose","BLE","Nostr","Room"],
+  ["Multi-hop BLE mesh with duplicate suppression and acknowledgements","AES-GCM encrypted private messages, signed messages and cryptographic identities","Internet chats through Nostr relays (NIP-17, NIP-44)","Keys protected by Android Keystore; history stored with Room","Unit and instrumentation tests"]),
+ P("gemini-chat","Gemini AI chatbot","Mobile",
+  "An Android chat app built on the Gemini API with saved conversations and voice input.",
+  "Student project using MVVM, with separate ViewModels and repositories for state and API calls.",
+  ["Kotlin","Jetpack Compose","Gemini"],
+  ["Multiple chats persisted across restarts","Voice input, light and dark themes","Input validation, error handling and automatic retries","Camera and gallery experiments with Coil and Glide caching"]),
+ P("lexai","LexAI","AI / Agents","A chatbot that answers questions about Indian law in plain language.",
+  "Replace this text with your own write-up: the problem, how retrieval and prompting work, and what you learned.",["Python","FastAPI"],[]),
+ P("codesentinel","CodeSentinel: code intelligence for VS Code","AI / Agents",
+  "A local-first VS Code extension for searching and reviewing codebases with RAG and a local LLM.",
+  "Designed to keep source code on the developer's machine. Semantic search is the first goal; reviews and fixes are planned.",
+  ["TypeScript","Node.js","Python","FastAPI","Tree-sitter","Qdrant","Ollama"],
+  ["Natural-language semantic search over repositories","AST-based parsing with Tree-sitter","RAG with Qdrant and Ollama","Planned: code review, security analysis and patch previews"],"In progress"),
+ P("cybershield","CyberShield AI","CV / Privacy",
+  "A browser extension that flags abusive and profane text on webpages using a local Flask API.",
+  "Text never leaves the machine. A TF-IDF + LinearSVC classifier is combined with rule-based profanity checks that cover Hinglish terms. On the project's held-out test split (3,405 samples) the balanced policy scored about 93.5% F1; real webpages may differ.",
+  ["Python","scikit-learn","Flask","JavaScript","Chrome MV3"],
+  ["Rescans pages as content changes","Relaxed, Balanced and Strict sensitivity modes","Explains scores, thresholds and matched terms","Reports and feedback stored locally in IndexedDB, exportable as JSON"]),
+ P("doc-scanner","Smart Document Scanner","CV / Privacy",
+  "Turns photos of documents into clean, flat scans using image processing and classical AI.",
+  "Runs locally with no cloud services or deep learning. Group project for the AI course.",
+  ["Python","OpenCV","NumPy"],
+  ["Corner detection with Canny, Otsu and contours, plus manual corner adjustment","Perspective correction, A* edge tracing and CSP-based checks","FFT shadow removal, CLAHE and K-means colour analysis","Rule-based scan advisor that explains its settings"]),
+ P("observatory","OS Observatory","Full-Stack / DevOps",
+  "A real-time dashboard for CPU, memory, disk, network and per-process activity.",
+  "Student project for Operating Systems. Includes stress tests, threshold alerts and a Prometheus exporter with Grafana dashboards.",
+  ["Python","Flask","Docker","Prometheus","Grafana","pytest","GitHub Actions"],
+  ["Process view with threads and context switches","Alerts for high CPU, memory pressure and low disk","Controlled CPU, memory and disk stress tests","Native and Docker Compose modes with CI"]),
+ P("jalwaa","Jalwaa AI","Full-Stack / DevOps",
+  "Salon discovery and booking for Mumbai, with an AI style consultant and QR booking passes.",
+  "Separate customer and salon-owner workflows, with seeded salon data as a fallback when live listings are unavailable.",
+  ["React","TypeScript","Vite","Tailwind CSS","Node.js","Express","Supabase","Groq"],
+  ["AI style advice from text or an uploaded image","Location-based salon search, services and appointment booking","QR booking passes and a check-in screen for owners","Owner dashboard for the queue, statuses and service catalogue"]),
+ P("placeit","PlaceIt: student placement portal","Full-Stack / DevOps",
+  "A placement portal with student, company and super-admin dashboards.",
+  "Includes a rule-based job recommender that scores CGPA eligibility, department, matching skills and preferences.",
+  ["JavaScript","Node.js","Express","MySQL"],
+  ["Registration, job search, filters and duplicate-safe applications","Student profiles with skills, certifications and CGPA","Company dashboard to post jobs and review applicants","Parameterised SQL queries and a REST API"]),
+ P("link-ticket","Link Ticket","Full-Stack / DevOps",
+  "A URL shortener and QR code generator with a ticket-style interface.",
+  "Built on Cloudflare Pages Functions and Workers KV. The code is in the repository, but live deployment has not been verified, so check it before you link a demo.",
+  ["React","Vite","Tailwind CSS","Cloudflare"],
+  ["Random six-character or custom short codes","QR codes you can download as PNG","URL validation and redirects","Copy-to-clipboard"]),
+ P("tradenest","Tradenest","Full-Stack / DevOps","A wholesale marketplace for businesses, built for a hackathon.",
+  "Describe what the team built in the time you had and your role.",["TypeScript"],[]),
+ P("converter","File converter extension","Full-Stack / DevOps","A browser extension that converts images and documents without leaving the tab.",
+  "Describe supported formats and how conversion works.",["JavaScript"],[]),
+ P("cyberbullying","Cyberbullying detection in Hinglish","AI / Agents","Research on detecting abusive text that mixes Hindi and English.",
+  "Describe the dataset, the models you compared and the results.",["Python"],[]),
+ P("decision-tree","Decision tree classification","AI / Agents",
+  "Entropy-based decision trees for infection prediction and breast cancer classification.",
+  "Machine learning project in Python with scikit-learn, evaluated with accuracy, confusion matrix and classification report.",
+  ["Python","scikit-learn","pandas","NumPy"],
+  ["Entropy and information gain on two datasets","Train-test split and controlled depth to limit overfitting","Visualised decision paths with Matplotlib"]),
+ P("sudoku","Sudoku backtracking visualizer","Algorithms / Games",
+  "A Sudoku game that animates a recursive backtracking solver.",
+  "Generates puzzles at three difficulty levels and checks that each has a unique solution.",
+  ["Python","Pygame"],
+  ["Animated solver with row, column and box validation","Hints, notes, undo, timer and best times"]),
+ P("hangman","Hangman terminal game","Algorithms / Games",
+  "A keyboard-driven Hangman game with a styled terminal interface.",
+  "Built with Textual, with reactive UI updates and automated tests of the game logic.",
+  ["Python","Textual"],
+  ["Animated gallows for six wrong guesses","Restart and quit shortcuts"])
 ];
 /* ===== END EDIT SECTION ===== */
 
@@ -140,7 +196,7 @@ function home(){
 }
 
 function card(p){
-  return `<a class="card" href="#p-${p.id}"><h4>${esc(p.title)}</h4><p>${esc(p.summary)}</p>${badges(p.stack)}</a>`;
+  return `<a class="card" href="#p-${p.id}"><h4>${esc(p.title)}</h4><p>${esc(p.summary)}</p>${badges(p.stack.slice(0,5))}</a>`;
 }
 
 let filter = "All";
@@ -167,8 +223,9 @@ function detail(p){
     : `<div class="shot-ph">Add screenshots in the images list</div>`;
   app.innerHTML = `<a class="back" href="#projects">Back to projects</a>
     <h1 style="font-size:2.4rem">${esc(p.title)}</h1>
-    <p class="meta">${esc(p.domain)}</p>${badges(p.stack)}
+    <p class="meta">${esc(p.domain)}${p.status?" ("+esc(p.status)+")":""}</p>${badges(p.stack)}
     <p style="max-width:42rem;margin-top:1.25rem">${esc(p.details)}</p>
+    ${p.features.length?`<ul style="max-width:42rem;padding-left:1.2rem">${p.features.map(f=>`<li>${esc(f)}</li>`).join("")}</ul>`:""}
     <div class="links">${links || `<span class="empty">Add GitHub, LinkedIn or a live link to show buttons here.</span>`}</div>
     <div class="shots">${shots}</div>`;
 }
