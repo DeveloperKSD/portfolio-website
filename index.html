@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1015">
-<meta name="description" content="Kik — Computer science student building useful software across AI, systems, privacy, mobile and the web.">
-<title>Kik — CS student & builder</title>
+<meta name="description" content="Kshitij — Computer science student building useful software across AI, systems, privacy, mobile and the web.">
+<title>Kshitij — CS student & builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -113,15 +113,15 @@ footer a{color:var(--ink);text-decoration:none}
 </head>
 <body>
 <header><div class="wrap"><nav aria-label="Main navigation">
-<a class="brand" href="#home"><span class="brand-mark">K</span>Kik</a>
+<a class="brand" href="#home"><span class="brand-mark">K</span>Kshitij</a>
 <a class="tab" href="#home" data-tab="home">Home</a><a class="tab" href="#projects" data-tab="projects">Projects</a><a class="tab" href="#about" data-tab="about">About</a><a class="tab" href="#contact" data-tab="contact">Contact</a>
 <div class="nav-right"><button class="pill-button" id="theme" type="button" aria-label="Toggle colour theme">☼ Light</button></div>
 </nav></div></header>
 <main class="wrap" id="app"></main>
-<footer><div class="wrap footer-inner"><span>Designed and built with HTML, CSS & JavaScript.</span><span>© <span id="year"></span> Kik · <a href="#home">Back to top ↑</a></span></div></footer>
+<footer><div class="wrap footer-inner"><span>Designed and built with HTML, CSS & JavaScript.</span><span>© <span id="year"></span> Kshitij · <a href="#home">Back to top ↑</a></span></div></footer>
 <script>
 const PROFILE={
- name:"Kik",
+ name:"Kshitij",
  intro:"Computer science student, curious builder, and fan of software that works end to end.",
  more:"I build across applied AI, privacy, operating systems, mobile apps and developer tools. I like understanding how things work, then turning that curiosity into something people can actually use.",
  email:"you@example.com",
@@ -163,7 +163,7 @@ let activeFilter="All";
 function projectsPage(){const list=PROJECTS.filter(p=>activeFilter==="All"||p.domain===activeFilter);app.innerHTML=`<section id="projects" style="border-top:0"><div class="section-head reveal"><div><div class="kicker">The workbench</div><h2>Projects</h2><p class="lede">Browse projects by area. Open any card for a little more detail.</p></div><span class="project-domain">${list.length} PROJECTS</span></div><div class="filters" role="group" aria-label="Filter projects">${DOMAINS.map(d=>`<button class="chip" data-filter="${esc(d)}" aria-pressed="${d===activeFilter}">${esc(d)}</button>`).join("")}</div><div class="project-grid">${list.map(projectCard).join("")}</div></section>`;app.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{activeFilter=b.dataset.filter;projectsPage()});observeReveals();}
 function detailPage(id){const p=PROJECTS.find(x=>x.id===id);if(!p){home();return}app.innerHTML=`<section style="border-top:0"><a class="btn" href="#projects">← Back to projects</a><div class="project-detail"><div class="detail-head"><div><div class="kicker">${esc(p.domain)}${p.status?" · "+esc(p.status):""}</div><h3>${esc(p.title)}</h3></div><span class="project-icon">${p.icon||iconFor(p.domain)}</span></div><p>${esc(p.details)}</p><h4>What it includes</h4><ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join("")}</ul><h4>Tech stack</h4>${tags(p.stack)}<div class="detail-links">${p.github?`<a class="btn" href="${esc(p.github)}" target="_blank" rel="noopener">GitHub ↗</a>`:""}${p.live?`<a class="btn primary" href="${esc(p.live)}" target="_blank" rel="noopener">Live demo ↗</a>`:""}<span class="empty">${!p.github&&!p.live?"Add this project's repository or live demo URL in the PROJECTS data to show a link here.":""}</span></div></div></section>`}
 function contactPage(){app.innerHTML=`<section id="contact" style="border-top:0"><div class="contact-panel"><div><div class="kicker">Say hello</div><h2>Let's talk.</h2><p>For collaborations, project feedback or a good technical conversation.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me ↗</a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub ↗</a><a class="btn" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a></div></div></section>`}
-function route(){const hash=location.hash.slice(1)||"home";if(hash.startsWith("project=")){detailPage(decodeURIComponent(hash.slice(8)));setTab("projects")}else if(hash==="projects"){projectsPage();setTab("projects")}else if(hash==="about"){home();setTab("about");setTimeout(()=>$("#about")?.scrollIntoView(),0)}else if(hash==="contact"){contactPage();setTab("contact")}else{home();setTab("home")}document.title=(hash.startsWith("project=")?PROJECTS.find(p=>p.id===decodeURIComponent(hash.slice(8)))?.title+" — ":"")+"Kik — CS student & builder";window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});observeReveals()}
+function route(){const hash=location.hash.slice(1)||"home";if(hash.startsWith("project=")){detailPage(decodeURIComponent(hash.slice(8)));setTab("projects")}else if(hash==="projects"){projectsPage();setTab("projects")}else if(hash==="about"){home();setTab("about");setTimeout(()=>$("#about")?.scrollIntoView(),0)}else if(hash==="contact"){contactPage();setTab("contact")}else{home();setTab("home")}document.title=(hash.startsWith("project=")?PROJECTS.find(p=>p.id===decodeURIComponent(hash.slice(8)))?.title+" — ":"")+"Kshitij — CS student & builder";window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});observeReveals()}
 function setTab(tab){document.querySelectorAll("[data-tab]").forEach(a=>a.toggleAttribute("aria-current",a.dataset.tab===tab))}
 addEventListener("hashchange",route);
 const root=document.documentElement,themeBtn=$("#theme");
