@@ -3,270 +3,176 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kik | Computer Science student and builder</title>
+<meta name="theme-color" content="#0b1015">
+<meta name="description" content="Kik — Computer science student building useful software across AI, systems, privacy, mobile and the web.">
+<title>Kik — CS student & builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F5F6F4;--surface:#FFFFFF;--ink:#17201D;--muted:#5A6762;--line:#DCE1DE;--accent:#2B4FD8;--accent-ink:#fff;color-scheme:light}
-:root[data-theme="dark"]{--bg:#101413;--surface:#171C1A;--ink:#E7EDEA;--muted:#9AA7A1;--line:#26302C;--accent:#8FA6FF;--accent-ink:#0E1330;color-scheme:dark}
+:root{color-scheme:dark;--bg:#0b1015;--panel:#111920;--panel2:#151f27;--ink:#edf5f4;--muted:#9aabae;--line:#26363c;--accent:#7cf5cb;--accent2:#a6b8ff;--shadow:0 18px 50px #0003;--radius:20px}
+:root[data-theme="light"]{color-scheme:light;--bg:#f3f6f4;--panel:#fff;--panel2:#eaf2ee;--ink:#142521;--muted:#526963;--line:#d8e3dd;--accent:#087c5b;--accent2:#485bc7;--shadow:0 18px 50px #19372b12}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 Figtree,system-ui,sans-serif}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-.wrap{max-width:62rem;margin:0 auto;padding:0 1.5rem}
-header{border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
-nav{display:flex;align-items:center;gap:1.5rem;height:3.75rem}
-nav .brand{font-weight:700;text-decoration:none;margin-right:auto}
-nav a.tab{text-decoration:none;color:var(--muted);padding:.25rem 0;border-bottom:2px solid transparent}
-nav a.tab:hover,nav a.tab[aria-current]{color:var(--ink);border-color:var(--accent)}
-button,.btn{font:inherit;cursor:pointer}
-.icon-btn{background:none;border:1px solid var(--line);color:var(--ink);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
-.icon-btn:hover{border-color:var(--ink)}
-.btn{display:inline-block;text-decoration:none;font-weight:600;padding:.65rem 1.1rem;border-radius:.5rem;border:1px solid var(--ink)}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.btn:hover{filter:brightness(1.08)}
-.hero{padding:5rem 0 4rem;max-width:40rem}
-h1{font-size:clamp(2.2rem,5vw,3.25rem);line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
-.hero p{color:var(--muted);margin:0 0 1rem}
-.row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
-section{padding:3rem 0;border-top:1px solid var(--line)}
-h2{font-size:1.6rem;margin:0 0 .5rem;letter-spacing:-.01em}
-.lede{color:var(--muted);margin:0 0 1.5rem}
-.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
-.chip{background:none;border:1px solid var(--line);color:var(--muted);border-radius:2rem;padding:.3rem .9rem;font-size:.95rem}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.domain{margin-bottom:2.5rem}
-.domain h3{font-size:1.15rem;margin:0 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:1rem}
-.card{display:flex;flex-direction:column;gap:.6rem;background:var(--surface);border:1px solid var(--line);border-radius:.5rem;padding:1.1rem;text-decoration:none}
-.card:hover{border-color:var(--accent)}
-.card h4{margin:0;font-size:1.05rem}
-.card p{margin:0;color:var(--muted);font-size:.97rem;flex:1}
-.empty{color:var(--muted);font-style:italic}
-.badges{display:flex;flex-wrap:wrap;gap:.35rem}
-.badge{display:inline-flex;font-size:.78rem;font-weight:600;border-radius:.25rem;overflow:hidden;line-height:1}
-.badge span{padding:.3rem .4rem;background:#3b4440;color:#fff}
-.badge b{padding:.3rem .5rem;color:#fff;font-weight:600}
-.back{display:inline-block;margin:2rem 0 1rem;color:var(--muted)}
-.links{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.25rem 0 2rem}
-.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem}
-.shots img,.shot-ph{width:100%;aspect-ratio:16/10;object-fit:cover;border:1px solid var(--line);border-radius:.5rem;background:var(--surface)}
-.shot-ph{display:grid;place-items:center;color:var(--muted);font-size:.9rem}
-.meta{color:var(--muted)}
-footer{border-top:1px solid var(--line);padding:2rem 0;color:var(--muted);font-size:.95rem}
-@media (max-width:34rem){nav{gap:.9rem}.hero{padding-top:3rem}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 Manrope,system-ui,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 12% 4%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 36%),radial-gradient(ellipse at 88% 22%,color-mix(in srgb,var(--accent2) 9%,transparent),transparent 32%)}
+a{color:inherit}button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.wrap{width:min(1100px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid color-mix(in srgb,var(--line) 75%,transparent)}
+nav{height:72px;display:flex;align-items:center;gap:28px}
+.brand{font-weight:800;font-size:1.35rem;letter-spacing:-.08em;text-decoration:none;display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--accent);color:#07130f;display:grid;place-items:center;font-size:.95rem;box-shadow:0 0 25px color-mix(in srgb,var(--accent) 20%,transparent)}
+nav a.tab{font-size:.9rem;color:var(--muted);text-decoration:none;transition:color .2s}
+nav a.tab:hover,nav a.tab[aria-current]{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.pill-button{border:1px solid var(--line);background:var(--panel);padding:8px 13px;border-radius:999px;font-size:.82rem;transition:transform .2s,border-color .2s}
+.pill-button:hover{transform:translateY(-2px);border-color:var(--accent)}
+.hero{min-height:590px;display:grid;grid-template-columns:1.35fr .65fr;align-items:center;gap:55px;padding:85px 0 75px}
+.eyebrow{font:500 .76rem "DM Mono",monospace;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);display:flex;align-items:center;gap:10px}
+.eyebrow:before{content:"";width:25px;height:1px;background:currentColor}
+h1,h2,h3,h4,p{margin-top:0}
+h1{font-size:clamp(3.1rem,7vw,6.4rem);letter-spacing:-.085em;line-height:.99;margin:22px 0 25px;font-weight:800}
+.gradient{background:linear-gradient(100deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-copy{font-size:1.08rem;max-width:620px;color:var(--muted)}
+.hero-copy strong{color:var(--ink);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:var(--panel);font-weight:700;font-size:.9rem;transition:transform .2s,border-color .2s,background .2s}
+.btn:hover{transform:translateY(-3px);border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:#07140f;border-color:var(--accent)}
+.btn.primary:hover{filter:brightness(1.07)}
+.profile-card{position:relative;border:1px solid var(--line);border-radius:26px;padding:25px;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--panel2) 65%,var(--bg)));box-shadow:var(--shadow);transform:rotate(2deg);transition:transform .35s}
+.profile-card:hover{transform:rotate(0) translateY(-5px)}
+.profile-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.status{display:inline-flex;align-items:center;gap:8px;font: .75rem "DM Mono",monospace;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:pulse 2s infinite}
+.card-symbol{height:130px;border-radius:18px;background:linear-gradient(135deg,#183c38,#1b2443);display:grid;place-items:center;overflow:hidden;position:relative}
+.card-symbol:before,.card-symbol:after{content:"";position:absolute;width:180px;height:180px;border:1px solid #7cf5cb55;border-radius:42%;animation:spin 18s linear infinite}
+.card-symbol:after{width:130px;height:130px;border-color:#a6b8ff88;animation-direction:reverse;animation-duration:12s}
+.symbol{font-size:3.2rem;color:#7cf5cb;z-index:1;font-weight:800;letter-spacing:-.1em}
+.profile-card h3{font-size:1.25rem;margin:20px 0 4px}
+.profile-card p{font-size:.9rem;color:var(--muted);margin:0}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.stat{padding:12px 10px;background:var(--bg);border:1px solid var(--line);border-radius:12px}
+.stat b{display:block;font-size:1.2rem;letter-spacing:-.05em}
+.stat span{font-size:.68rem;color:var(--muted)}
+section{padding:70px 0;border-top:1px solid var(--line)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:30px}
+.kicker{font: .72rem "DM Mono",monospace;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;margin-bottom:10px}
+h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.07em;margin-bottom:10px}
+.lede{color:var(--muted);max-width:620px;margin:0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.info-panel{padding:25px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+.info-panel h3{font-size:1rem;margin-bottom:12px}
+.info-panel p{color:var(--muted);margin-bottom:0}
+.skill-list{display:flex;flex-wrap:wrap;gap:8px}
+.skill{border:1px solid var(--line);background:var(--bg);padding:7px 10px;border-radius:9px;font-size:.78rem;color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 28px}
+.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:8px 13px;border-radius:999px;font-size:.82rem;transition:all .2s}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--accent);color:#07140f;border-color:var(--accent);font-weight:700}
+.project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.project{display:flex;flex-direction:column;min-height:270px;padding:21px;border:1px solid var(--line);border-radius:18px;background:var(--panel);text-decoration:none;position:relative;overflow:hidden;transition:transform .25s,border-color .25s,background .25s}
+.project:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 100% 0,color-mix(in srgb,var(--accent) 10%,transparent),transparent 48%);opacity:0;transition:opacity .25s}
+.project:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--accent) 65%,var(--line));background:var(--panel2)}
+.project:hover:before{opacity:1}
+.project>*{position:relative}
+.project-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:23px}
+.project-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:var(--panel2);border:1px solid var(--line);font-size:1.1rem}
+.project-domain{font: .65rem "DM Mono",monospace;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.project h3{font-size:1.08rem;line-height:1.35;letter-spacing:-.035em;margin-bottom:10px}
+.project p{font-size:.85rem;line-height:1.65;color:var(--muted);margin-bottom:20px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{font-size:.68rem;padding:4px 7px;border-radius:6px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.project-arrow{position:absolute;right:20px;bottom:19px;color:var(--accent);font-size:1.1rem;opacity:0;transform:translate(-4px,4px);transition:.2s}
+.project:hover .project-arrow{opacity:1;transform:translate(0,0)}
+.project-detail{border:1px solid var(--line);border-radius:20px;background:var(--panel);padding:clamp(22px,4vw,40px);margin-top:20px;animation:fadeUp .35s ease both}
+.project-detail h3{font-size:1.8rem;letter-spacing:-.06em;margin:10px 0}
+.project-detail p,.project-detail li{color:var(--muted)}
+.project-detail ul{padding-left:20px}
+.detail-head{display:flex;justify-content:space-between;align-items:start;gap:15px}
+.close-detail{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:7px 12px}
+.detail-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.empty{color:var(--muted);font-size:.9rem}
+.contact-panel{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:clamp(25px,5vw,48px);border:1px solid var(--line);border-radius:24px;background:linear-gradient(125deg,var(--panel),var(--panel2))}
+.contact-panel h2{max-width:560px}
+.contact-panel p{color:var(--muted);margin-bottom:0}
+footer{padding:27px 0 35px;color:var(--muted);font-size:.8rem}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
+footer a{color:var(--ink);text-decoration:none}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.8)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:850px){.hero{grid-template-columns:1fr .7fr;gap:28px}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{min-height:520px}}
+@media(max-width:650px){.wrap{width:min(100% - 28px,1100px)}nav{height:64px;gap:15px}.brand{font-size:1.15rem}nav a.tab{font-size:.8rem}.nav-right .pill-button{padding:7px 9px}.hero{display:flex;flex-direction:column;align-items:stretch;padding:65px 0 55px;gap:35px;min-height:unset}.hero h1{font-size:clamp(3.2rem,15vw,5rem)}.profile-card{max-width:430px;transform:none;width:100%;align-self:center}.section-head{display:block}.section-head .lede{margin-top:10px}.about-grid{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}.project{min-height:230px}.contact-panel{display:block}.contact-panel .actions{margin-top:22px}.footer-inner{align-items:flex-start;flex-direction:column;gap:5px}}
+@media(max-width:390px){nav{gap:10px}.brand-mark{width:29px;height:29px}.brand{gap:7px}nav a.tab{font-size:.74rem}.nav-right .pill-button{font-size:.72rem}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-<header><div class="wrap"><nav aria-label="Main">
-  <a class="brand" href="#home">Kik</a>
-  <a class="tab" href="#home" data-tab="home">Home</a>
-  <a class="tab" href="#projects" data-tab="projects">Projects</a>
-  <a class="tab" href="#contact" data-tab="contact">Contact</a>
-  <button class="icon-btn" id="theme" aria-label="Switch colour theme">Dark</button>
+<header><div class="wrap"><nav aria-label="Main navigation">
+<a class="brand" href="#home"><span class="brand-mark">K</span>Kik</a>
+<a class="tab" href="#home" data-tab="home">Home</a><a class="tab" href="#projects" data-tab="projects">Projects</a><a class="tab" href="#about" data-tab="about">About</a><a class="tab" href="#contact" data-tab="contact">Contact</a>
+<div class="nav-right"><button class="pill-button" id="theme" type="button" aria-label="Toggle colour theme">☼ Light</button></div>
 </nav></div></header>
-
 <main class="wrap" id="app"></main>
-<footer><div class="wrap">Built with plain HTML, CSS and JavaScript.</div></footer>
-
+<footer><div class="wrap footer-inner"><span>Designed and built with HTML, CSS & JavaScript.</span><span>© <span id="year"></span> Kik · <a href="#home">Back to top ↑</a></span></div></footer>
 <script>
-/* ===== EDIT THIS SECTION ===== */
-const PROFILE = {
-  name: "Kik",
-  intro: "I'm a computer science student who likes building things that work end to end. Most of my projects are small systems I wanted to exist: a legal chatbot, a document scanner, a monitoring dashboard.",
-  more: "I study operating systems, databases and web development, and I'm learning more about DevOps and applied AI. I share what I build on GitHub.",
-  email: "you@example.com",
-  github: "https://github.com/your-username",
-  linkedin: "https://linkedin.com/in/your-username",
-  resume: "resume.pdf"   // put your resume file next to index.html
+const PROFILE={
+ name:"Kik",
+ intro:"Computer science student, curious builder, and fan of software that works end to end.",
+ more:"I build across applied AI, privacy, operating systems, mobile apps and developer tools. I like understanding how things work, then turning that curiosity into something people can actually use.",
+ email:"you@example.com",
+ github:"https://github.com/your-username",
+ linkedin:"https://linkedin.com/in/your-username",
+ resume:"resume.pdf"
 };
-
-const DOMAINS = ["AI / Agents", "Mobile", "CV / Privacy", "Full-Stack / DevOps", "Algorithms / Games"];
-
-// Badge colours for the tech stack (unlisted tech falls back to grey)
-const TECH = {Python:"#3776AB",Kotlin:"#7F52FF",TypeScript:"#3178C6",JavaScript:"#B8860B",Docker:"#2496ED",FastAPI:"#009688",Flask:"#444444",OpenCV:"#5C3EE8",Prometheus:"#E6522C",Grafana:"#F46800",React:"#2A9DBF","Node.js":"#4E8F3A",Express:"#555555",Vite:"#646CFF","Tailwind CSS":"#06B6D4",PostgreSQL:"#336791",MySQL:"#00758F",Gemini:"#8E75B2","Jetpack Compose":"#4285F4",BLE:"#0082FC",Nostr:"#8E44AD",Room:"#3DDC84",Ollama:"#333333",Qdrant:"#DC244C","scikit-learn":"#F7931E",Pygame:"#2E7D32",Textual:"#5A4FCF",Cloudflare:"#F38020",Supabase:"#3ECF8E",Groq:"#F55036","Chrome MV3":"#4285F4","Transformers.js":"#E8A317",pytest:"#0A9EDC","GitHub Actions":"#2088FF",NumPy:"#4D77CF",pandas:"#150458",Pydantic:"#E92063","Tree-sitter":"#4E8F3A",WebGPU:"#005A9C"};
-
-// links and images are optional: leave "" or [] to hide them.  features = bullet list on the project page.
-// The first three projects are shown on the home page.
-const P = (id,title,domain,summary,details,stack,features,status="") => ({id,title,domain,summary,details,stack,features,status,github:"",linkedin:"",live:"",images:[]});
-const PROJECTS = [
- P("rasoi","Rasoi: household management agent","AI / Agents",
-  "An AI agent that plans meals and manages groceries around diet, allergies, pantry stock and budget.",
-  "Student project. An agent workflow turns preferences and pantry inventory into meal plans and grocery tasks, and asks a human before sensitive actions.",
-  ["Python","FastAPI","React","Vite","Tailwind CSS","PostgreSQL","Docker","Gemini"],
-  ["Meal plans from dietary preferences, allergies and budget","Pantry tracking, grocery lists and ingredient substitution with replanning","Human approval checkpoints for sensitive actions and failed transactions","Workflow checkpointing and recovery to avoid duplicate operations","Dashboard for agent decisions, progress and simulated failures"]),
- P("privacy-agent","Privacy-preserving vision browser agent","CV / Privacy",
-  "A browser extension that redacts personal data from screenshots before an AI model decides the next click.",
-  "Student project. Sensitive text and people are detected and redacted on the device, and only the sanitised page context reaches the vision model.",
-  ["JavaScript","Python","FastAPI","Chrome MV3","Transformers.js","WebGPU","Ollama"],
-  ["Detects emails, phone numbers, card, Aadhaar and PAN details","On-device object detection (YOLOS-Tiny) blurs people in screenshots","Works with OpenAI-compatible models or local Ollama, plus an offline mock mode","Shows executed actions, redacted regions and latency in the extension"]),
- P("relay","Relay: offline Bluetooth mesh messenger","Mobile",
-  "An Android messenger that works over a Bluetooth LE mesh without internet, or over Nostr when online.",
-  "Student project for Mobile App Development, focused on privacy and encrypted peer-to-peer communication.",
-  ["Kotlin","Jetpack Compose","BLE","Nostr","Room"],
-  ["Multi-hop BLE mesh with duplicate suppression and acknowledgements","AES-GCM encrypted private messages, signed messages and cryptographic identities","Internet chats through Nostr relays (NIP-17, NIP-44)","Keys protected by Android Keystore; history stored with Room","Unit and instrumentation tests"]),
- P("gemini-chat","Gemini AI chatbot","Mobile",
-  "An Android chat app built on the Gemini API with saved conversations and voice input.",
-  "Student project using MVVM, with separate ViewModels and repositories for state and API calls.",
-  ["Kotlin","Jetpack Compose","Gemini"],
-  ["Multiple chats persisted across restarts","Voice input, light and dark themes","Input validation, error handling and automatic retries","Camera and gallery experiments with Coil and Glide caching"]),
- P("lexai","LexAI","AI / Agents","A chatbot that answers questions about Indian law in plain language.",
-  "Replace this text with your own write-up: the problem, how retrieval and prompting work, and what you learned.",["Python","FastAPI"],[]),
- P("codesentinel","CodeSentinel: code intelligence for VS Code","AI / Agents",
-  "A local-first VS Code extension for searching and reviewing codebases with RAG and a local LLM.",
-  "Designed to keep source code on the developer's machine. Semantic search is the first goal; reviews and fixes are planned.",
-  ["TypeScript","Node.js","Python","FastAPI","Tree-sitter","Qdrant","Ollama"],
-  ["Natural-language semantic search over repositories","AST-based parsing with Tree-sitter","RAG with Qdrant and Ollama","Planned: code review, security analysis and patch previews"],"In progress"),
- P("cybershield","CyberShield AI","CV / Privacy",
-  "A browser extension that flags abusive and profane text on webpages using a local Flask API.",
-  "Text never leaves the machine. A TF-IDF + LinearSVC classifier is combined with rule-based profanity checks that cover Hinglish terms. On the project's held-out test split (3,405 samples) the balanced policy scored about 93.5% F1; real webpages may differ.",
-  ["Python","scikit-learn","Flask","JavaScript","Chrome MV3"],
-  ["Rescans pages as content changes","Relaxed, Balanced and Strict sensitivity modes","Explains scores, thresholds and matched terms","Reports and feedback stored locally in IndexedDB, exportable as JSON"]),
- P("doc-scanner","Smart Document Scanner","CV / Privacy",
-  "Turns photos of documents into clean, flat scans using image processing and classical AI.",
-  "Runs locally with no cloud services or deep learning. Group project for the AI course.",
-  ["Python","OpenCV","NumPy"],
-  ["Corner detection with Canny, Otsu and contours, plus manual corner adjustment","Perspective correction, A* edge tracing and CSP-based checks","FFT shadow removal, CLAHE and K-means colour analysis","Rule-based scan advisor that explains its settings"]),
- P("observatory","OS Observatory","Full-Stack / DevOps",
-  "A real-time dashboard for CPU, memory, disk, network and per-process activity.",
-  "Student project for Operating Systems. Includes stress tests, threshold alerts and a Prometheus exporter with Grafana dashboards.",
-  ["Python","Flask","Docker","Prometheus","Grafana","pytest","GitHub Actions"],
-  ["Process view with threads and context switches","Alerts for high CPU, memory pressure and low disk","Controlled CPU, memory and disk stress tests","Native and Docker Compose modes with CI"]),
- P("jalwaa","Jalwaa AI","Full-Stack / DevOps",
-  "Salon discovery and booking for Mumbai, with an AI style consultant and QR booking passes.",
-  "Separate customer and salon-owner workflows, with seeded salon data as a fallback when live listings are unavailable.",
-  ["React","TypeScript","Vite","Tailwind CSS","Node.js","Express","Supabase","Groq"],
-  ["AI style advice from text or an uploaded image","Location-based salon search, services and appointment booking","QR booking passes and a check-in screen for owners","Owner dashboard for the queue, statuses and service catalogue"]),
- P("placeit","PlaceIt: student placement portal","Full-Stack / DevOps",
-  "A placement portal with student, company and super-admin dashboards.",
-  "Includes a rule-based job recommender that scores CGPA eligibility, department, matching skills and preferences.",
-  ["JavaScript","Node.js","Express","MySQL"],
-  ["Registration, job search, filters and duplicate-safe applications","Student profiles with skills, certifications and CGPA","Company dashboard to post jobs and review applicants","Parameterised SQL queries and a REST API"]),
- P("link-ticket","Link Ticket","Full-Stack / DevOps",
-  "A URL shortener and QR code generator with a ticket-style interface.",
-  "Built on Cloudflare Pages Functions and Workers KV. The code is in the repository, but live deployment has not been verified, so check it before you link a demo.",
-  ["React","Vite","Tailwind CSS","Cloudflare"],
-  ["Random six-character or custom short codes","QR codes you can download as PNG","URL validation and redirects","Copy-to-clipboard"]),
- P("tradenest","Tradenest","Full-Stack / DevOps","A wholesale marketplace for businesses, built for a hackathon.",
-  "Describe what the team built in the time you had and your role.",["TypeScript"],[]),
- P("converter","File converter extension","Full-Stack / DevOps","A browser extension that converts images and documents without leaving the tab.",
-  "Describe supported formats and how conversion works.",["JavaScript"],[]),
- P("cyberbullying","Cyberbullying detection in Hinglish","AI / Agents","Research on detecting abusive text that mixes Hindi and English.",
-  "Describe the dataset, the models you compared and the results.",["Python"],[]),
- P("decision-tree","Decision tree classification","AI / Agents",
-  "Entropy-based decision trees for infection prediction and breast cancer classification.",
-  "Machine learning project in Python with scikit-learn, evaluated with accuracy, confusion matrix and classification report.",
-  ["Python","scikit-learn","pandas","NumPy"],
-  ["Entropy and information gain on two datasets","Train-test split and controlled depth to limit overfitting","Visualised decision paths with Matplotlib"]),
- P("sudoku","Sudoku backtracking visualizer","Algorithms / Games",
-  "A Sudoku game that animates a recursive backtracking solver.",
-  "Generates puzzles at three difficulty levels and checks that each has a unique solution.",
-  ["Python","Pygame"],
-  ["Animated solver with row, column and box validation","Hints, notes, undo, timer and best times"]),
- P("hangman","Hangman terminal game","Algorithms / Games",
-  "A keyboard-driven Hangman game with a styled terminal interface.",
-  "Built with Textual, with reactive UI updates and automated tests of the game logic.",
-  ["Python","Textual"],
-  ["Animated gallows for six wrong guesses","Restart and quit shortcuts"])
+const PROJECTS=[
+{id:"rasoi",title:"Rasoi — household management agent",domain:"AI / Agents",icon:"✳",summary:"An AI agent for meal planning and grocery management around diet, allergies, pantry stock and budget.",stack:["Python","FastAPI","React","PostgreSQL","Docker","Gemini"],details:"A student project exploring how an agent can turn household preferences and pantry inventory into meal plans and grocery tasks, with human approval before sensitive actions.",features:["Meal plans based on dietary preferences, allergies and budget","Pantry tracking, grocery lists and ingredient substitutions","Human approval checkpoints and recovery from failed operations","Dashboard for agent decisions, progress and simulated failures"]},
+{id:"privacy-agent",title:"Privacy-preserving vision browser agent",domain:"CV / Privacy",icon:"◉",summary:"A browser extension that redacts personal data from screenshots before an AI model chooses the next action.",stack:["JavaScript","Python","FastAPI","Chrome MV3","Transformers.js","Ollama"],details:"Sensitive text and people are detected and redacted on-device so sanitised page context can be sent to a vision model.",features:["Detects email, phone and selected identity-number patterns","On-device people detection and screenshot redaction","Supports local Ollama and OpenAI-compatible model endpoints","Shows redacted regions, actions and latency"]},
+{id:"relay",title:"Relay — offline Bluetooth mesh messenger",domain:"Mobile",icon:"⌁",summary:"An Android messenger designed for nearby communication over Bluetooth LE, with Nostr messaging when online.",stack:["Kotlin","Jetpack Compose","BLE","Nostr","Room"],details:"A mobile app project focused on private peer-to-peer communication, with an offline-first approach.",features:["Multi-hop BLE mesh with duplicate suppression and acknowledgements","Encrypted private messages and signed identities","Nostr relays for internet messaging","Android Keystore and Room-backed history"]},
+{id:"gemini-chat",title:"Gemini AI chatbot",domain:"Mobile",icon:"✧",summary:"An Android chat app with saved conversations, voice input and a modern Compose interface.",stack:["Kotlin","Jetpack Compose","Gemini"],details:"A student Android project using MVVM, with separate ViewModels and repositories for app state and API calls.",features:["Multiple conversations saved across restarts","Voice input and light/dark themes","Input validation, error handling and retries","Camera and gallery experiments"]},
+{id:"lexai",title:"LexAI — Indian law chatbot",domain:"AI / Agents",icon:"§",summary:"A chatbot that explains questions about Indian law in plain language.",stack:["Python","FastAPI"],details:"A legal information chatbot project. Add your exact retrieval approach, data sources and evaluation method here before publishing.",features:["Plain-language legal information","Designed around common questions about Indian law"]},
+{id:"codesentinel",title:"CodeSentinel — code intelligence for VS Code",domain:"AI / Agents",icon:"⌘",summary:"A local-first codebase search and review extension using retrieval and local models.",stack:["TypeScript","Node.js","Tree-sitter","Qdrant","Ollama"],details:"Designed to keep source code on the developer's machine. Semantic repository search is the initial focus; review and patch workflows are planned.",features:["Natural-language semantic search across repositories","AST-based parsing with Tree-sitter","Retrieval with Qdrant and local Ollama models","Planned: code review, security analysis and patch previews"],status:"In progress"},
+{id:"cybershield",title:"CyberShield AI",domain:"CV / Privacy",icon:"⌁",summary:"A browser extension that flags abusive and profane text using a local Flask API.",stack:["Python","scikit-learn","Flask","JavaScript","Chrome MV3"],details:"A TF-IDF word/character feature model with LinearSVC is combined with rule-based profanity checks, including Hinglish terms. The reported held-out test split scored about 93.5% F1; real-world webpages may differ.",features:["Rescans pages as content changes","Relaxed, Balanced and Strict sensitivity modes","Explains scores, thresholds and matched terms","Local feedback storage with JSON export"]},
+{id:"doc-scanner",title:"Smart Document Scanner",domain:"CV / Privacy",icon:"▧",summary:"Turns document photos into clean, flattened scans with classical image processing.",stack:["Python","OpenCV","NumPy"],details:"A local-first AI course group project using image processing rather than cloud services or deep learning.",features:["Contour-based corner detection and manual adjustment","Perspective correction and scan validation","Shadow reduction, CLAHE and colour analysis","Rule-based scan advisor"]},
+{id:"observatory",title:"OS Observatory",domain:"Systems / DevOps",icon:"▥",summary:"A live dashboard for CPU, memory, disk, network and per-process activity.",stack:["Python","Flask","Docker","Prometheus","Grafana","pytest"],details:"An Operating Systems project that measures real system activity and visualises it through a web dashboard, Prometheus exporter and Grafana.",features:["Process view with threads and context switches","CPU, memory and disk threshold alerts","Controlled CPU, memory and disk stress tests","Native and Docker Compose modes with CI"]},
+{id:"jalwaa",title:"Jalwaa AI",domain:"Full-Stack",icon:"✳",summary:"Salon discovery and booking with an AI style consultant and QR booking passes.",stack:["React","TypeScript","Vite","Node.js","Supabase","Groq"],details:"A salon discovery and booking experience with separate customer and salon-owner workflows. Seeded salon data can act as a fallback when live listings are unavailable.",features:["AI style advice from text or an uploaded image","Salon search, services and appointment booking","QR booking passes and owner check-in screen","Owner dashboard for queues and service catalogues"]},
+{id:"placeit",title:"PlaceIt — student placement portal",domain:"Full-Stack",icon:"↗",summary:"A placement portal with student, company and super-admin dashboards.",stack:["JavaScript","Node.js","Express","MySQL"],details:"A full-stack placement portal with a rule-based job recommender that scores eligibility, department, matching skills and preferences.",features:["Registration, job search, filters and applications","Student profiles with skills and certifications","Company dashboard to post jobs and review applicants","Parameterized SQL queries and REST API"]},
+{id:"link-ticket",title:"Link Ticket",domain:"Full-Stack",icon:"↗",summary:"A URL shortener and QR code generator with a ticket-inspired interface.",stack:["React","Vite","Tailwind CSS","Cloudflare"],details:"Built around Cloudflare Pages Functions and Workers KV. Verify the live deployment before adding a demo link.",features:["Random or custom short codes","Downloadable QR codes","URL validation and redirects","Copy-to-clipboard"]},
+{id:"tradenest",title:"Tradenest",domain:"Full-Stack",icon:"◇",summary:"A wholesale marketplace for businesses built for a hackathon.",stack:["TypeScript"],details:"Add the specific features you and your team implemented, plus your personal contribution.",features:["Hackathon marketplace concept"]},
+{id:"converter",title:"File converter extension",domain:"Full-Stack",icon:"⇄",summary:"A browser extension for converting files without leaving the current tab.",stack:["JavaScript"],details:"Add the exact supported formats and explain whether conversion is handled locally or by a service.",features:["In-browser workflow","Extension-based interface"]},
+{id:"cyberbullying",title:"Cyberbullying detection in Hinglish",domain:"AI / Agents",icon:"◉",summary:"A project exploring abusive-text detection in messages that mix Hindi and English.",stack:["Python"],details:"Document the dataset, train/test split, models compared and evaluation results so readers can assess the work.",features:["Hinglish text classification","Model evaluation"]},
+{id:"decision-tree",title:"Decision tree classification",domain:"AI / Agents",icon:"⌘",summary:"Entropy-based decision trees for infection prediction and breast cancer classification.",stack:["Python","scikit-learn","pandas","NumPy"],details:"A machine learning project evaluated with accuracy, confusion matrices and classification reports.",features:["Entropy and information gain","Train/test split and depth control","Visualised decision paths"]},
+{id:"sudoku",title:"Sudoku backtracking visualizer",domain:"Algorithms",icon:"▦",summary:"A Sudoku game that animates a recursive backtracking solver.",stack:["Python","Pygame"],details:"Generates puzzles at multiple difficulty levels and checks that each puzzle has a unique solution.",features:["Animated solver with row, column and box validation","Hints, notes, undo, timer and best times"]},
+{id:"hangman",title:"Hangman terminal game",domain:"Algorithms",icon:"⌨",summary:"A keyboard-driven Hangman game with a styled terminal interface.",stack:["Python","Textual"],details:"Built with Textual, reactive UI updates and automated tests for the game logic.",features:["Animated gallows for six wrong guesses","Restart and quit shortcuts"]}
 ];
-/* ===== END EDIT SECTION ===== */
-
-const $ = s => document.querySelector(s);
-const app = $("#app");
-const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-
-const badges = stack => `<div class="badges">${stack.map(t =>
-  `<span class="badge"><span>stack</span><b style="background:${TECH[t]||"#555"}">${esc(t)}</b></span>`).join("")}</div>`;
-
-function home(){
-  app.innerHTML = `
-  <div class="hero">
-    <h1>Hi, I'm ${esc(PROFILE.name)}.</h1>
-    <p>${esc(PROFILE.intro)}</p>
-    <p>${esc(PROFILE.more)}</p>
-    <div class="row">
-      <a class="btn primary" href="${esc(PROFILE.resume)}" download>Download resume</a>
-      <a class="btn" href="#projects">See projects</a>
-    </div>
-  </div>
-  <section><h2>Recent projects</h2><p class="lede">A few of the things I've built.</p>
-    <div class="grid">${PROJECTS.slice(0,3).map(card).join("")}</div></section>`;
-}
-
-function card(p){
-  return `<a class="card" href="#p-${p.id}"><h4>${esc(p.title)}</h4><p>${esc(p.summary)}</p>${badges(p.stack.slice(0,5))}</a>`;
-}
-
-let filter = "All";
-function projects(){
-  const chips = ["All",...DOMAINS].map(d =>
-    `<button class="chip" aria-pressed="${d===filter}" data-f="${esc(d)}">${esc(d)}</button>`).join("");
-  const groups = DOMAINS.filter(d => filter==="All" || d===filter).map(d => {
-    const list = PROJECTS.filter(p => p.domain===d);
-    return `<div class="domain"><h3>${esc(d)}</h3>${list.length
-      ? `<div class="grid">${list.map(card).join("")}</div>`
-      : `<p class="empty">No projects here yet.</p>`}</div>`;
-  }).join("");
-  app.innerHTML = `<section style="border:0"><h2>Projects</h2>
-    <p class="lede">Grouped by domain. Open a project for details, screenshots and links.</p>
-    <div class="filters" role="group" aria-label="Filter by domain">${chips}</div>${groups}</section>`;
-  app.querySelectorAll(".chip").forEach(b => b.onclick = () => { filter = b.dataset.f; projects(); });
-}
-
-function detail(p){
-  const links = [["GitHub",p.github],["LinkedIn post",p.linkedin],["Live site",p.live]]
-    .filter(l => l[1]).map(l => `<a class="btn" href="${esc(l[1])}" target="_blank" rel="noopener">${l[0]}</a>`).join("");
-  const shots = p.images.length
-    ? p.images.map(src => `<img src="${esc(src)}" alt="${esc(p.title)} screenshot" loading="lazy">`).join("")
-    : `<div class="shot-ph">Add screenshots in the images list</div>`;
-  app.innerHTML = `<a class="back" href="#projects">Back to projects</a>
-    <h1 style="font-size:2.4rem">${esc(p.title)}</h1>
-    <p class="meta">${esc(p.domain)}${p.status?" ("+esc(p.status)+")":""}</p>${badges(p.stack)}
-    <p style="max-width:42rem;margin-top:1.25rem">${esc(p.details)}</p>
-    ${p.features.length?`<ul style="max-width:42rem;padding-left:1.2rem">${p.features.map(f=>`<li>${esc(f)}</li>`).join("")}</ul>`:""}
-    <div class="links">${links || `<span class="empty">Add GitHub, LinkedIn or a live link to show buttons here.</span>`}</div>
-    <div class="shots">${shots}</div>`;
-}
-
-function contact(){
-  app.innerHTML = `<section style="border:0"><h2>Contact</h2>
-    <p class="lede">The quickest way to reach me is email.</p>
-    <div class="row" style="margin-top:0">
-      <a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me</a>
-      <a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="${esc(PROFILE.resume)}" download>Download resume</a>
-    </div></section>`;
-}
-
-function route(){
-  const h = location.hash.slice(1) || "home";
-  let tab = h;
-  if (h.startsWith("p-")) {
-    const p = PROJECTS.find(x => "p-"+x.id===h);
-    if (p) { detail(p); tab = "projects"; } else { home(); tab = "home"; }
-  } else if (h==="projects") projects();
-  else if (h==="contact") contact();
-  else { home(); tab = "home"; }
-  document.querySelectorAll("[data-tab]").forEach(a =>
-    a.toggleAttribute("aria-current", a.dataset.tab===tab));
-  document.title = (h.startsWith("p-") && PROJECTS.find(x=>"p-"+x.id===h)?.title || "Kik") + " | Portfolio";
-  window.scrollTo(0,0);
-}
-addEventListener("hashchange", route);
-
-// Theme: follows system, remembers choice
-const root = document.documentElement, tbtn = $("#theme");
-function setTheme(t, save){
-  root.dataset.theme = t; tbtn.textContent = t==="dark" ? "Light" : "Dark";
-  if (save) { try { localStorage.setItem("theme", t); } catch(e){} }
-}
-let saved = null; try { saved = localStorage.getItem("theme"); } catch(e){}
-setTheme(saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"), false);
-tbtn.onclick = () => setTheme(root.dataset.theme==="dark" ? "light" : "dark", true);
-
+const DOMAINS=["All","AI / Agents","CV / Privacy","Mobile","Systems / DevOps","Full-Stack","Algorithms"];
+const $=s=>document.querySelector(s),app=$("#app");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const tags=arr=>`<div class="tags">${arr.slice(0,5).map(x=>`<span class="tag">${esc(x)}</span>`).join("")}</div>`;
+const iconFor=d=>({"AI / Agents":"✳","CV / Privacy":"◉","Mobile":"▣","Systems / DevOps":"▥","Full-Stack":"↗","Algorithms":"⌘"}[d]||"◇");
+function projectCard(p){return `<a class="project reveal" href="#project=${encodeURIComponent(p.id)}"><div class="project-top"><span class="project-icon">${p.icon||iconFor(p.domain)}</span><span class="project-domain">${esc(p.domain)}</span></div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p>${tags(p.stack)}<span class="project-arrow">↗</span></a>`}
+function home(){app.innerHTML=`<section class="hero" id="home" style="border:0"><div class="reveal"><div class="eyebrow">Computer science · Mumbai, India</div><h1>Building things<br>that <span class="gradient">make sense.</span></h1><p class="hero-copy">Hey, I'm <strong>${esc(PROFILE.name)}</strong> — ${esc(PROFILE.intro)} ${esc(PROFILE.more)}</p><div class="actions"><a class="btn primary" href="#projects">Explore my work <span>↗</span></a><a class="btn" href="#contact">Get in touch</a></div></div><aside class="profile-card reveal"><div class="profile-top"><span class="status"><span class="dot"></span> Curious by default</span><span class="project-domain">PROFILE_001</span></div><div class="card-symbol"><span class="symbol">{k}</span></div><h3>Software, systems & AI</h3><p>Learning by building, debugging and shipping.</p><div class="stat-row"><div class="stat"><b>${PROJECTS.length}</b><span>Projects listed</span></div><div class="stat"><b>06</b><span>Core domains</span></div><div class="stat"><b>∞</b><span>Things to learn</span></div></div></aside></section>
+<section id="featured"><div class="section-head reveal"><div><div class="kicker">Selected work</div><h2>Some things I've built.</h2><p class="lede">A mix of practical tools, experiments and projects that helped me learn how the pieces fit together.</p></div><a class="btn" href="#projects">All projects ↗</a></div><div class="project-grid">${PROJECTS.slice(0,6).map(projectCard).join("")}</div></section>
+<section id="about"><div class="section-head reveal"><div><div class="kicker">A little about me</div><h2>Curiosity, then code.</h2><p class="lede">I enjoy projects where I can work across the stack and understand the system behind the interface.</p></div></div><div class="about-grid"><article class="info-panel reveal"><h3>What I’m exploring</h3><p>Applied AI and retrieval, privacy-aware browser tools, operating systems, backend development, automation and local-first software. I’m also learning more about DevOps and cloud workflows.</p></article><article class="info-panel reveal"><h3>Tools I use</h3><div class="skill-list">${["Python","C++","JavaScript","TypeScript","Kotlin","Flask","FastAPI","React","Docker","Prometheus","Grafana","OpenCV","scikit-learn","PostgreSQL","Git"].map(x=>`<span class="skill">${x}</span>`).join("")}</div></article></div></section>
+<section id="contact"><div class="contact-panel reveal"><div><div class="kicker">Have something in mind?</div><h2>Let's build something useful.</h2><p>Open to learning, collaborating and talking about interesting projects.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me ↗</a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub ↗</a></div></div></section>`}
+let activeFilter="All";
+function projectsPage(){const list=PROJECTS.filter(p=>activeFilter==="All"||p.domain===activeFilter);app.innerHTML=`<section id="projects" style="border-top:0"><div class="section-head reveal"><div><div class="kicker">The workbench</div><h2>Projects</h2><p class="lede">Browse projects by area. Open any card for a little more detail.</p></div><span class="project-domain">${list.length} PROJECTS</span></div><div class="filters" role="group" aria-label="Filter projects">${DOMAINS.map(d=>`<button class="chip" data-filter="${esc(d)}" aria-pressed="${d===activeFilter}">${esc(d)}</button>`).join("")}</div><div class="project-grid">${list.map(projectCard).join("")}</div></section>`;app.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{activeFilter=b.dataset.filter;projectsPage()});}
+function detailPage(id){const p=PROJECTS.find(x=>x.id===id);if(!p){home();return}app.innerHTML=`<section style="border-top:0"><a class="btn" href="#projects">← Back to projects</a><div class="project-detail"><div class="detail-head"><div><div class="kicker">${esc(p.domain)}${p.status?" · "+esc(p.status):""}</div><h3>${esc(p.title)}</h3></div><span class="project-icon">${p.icon||iconFor(p.domain)}</span></div><p>${esc(p.details)}</p><h4>What it includes</h4><ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join("")}</ul><h4>Tech stack</h4>${tags(p.stack)}<div class="detail-links">${p.github?`<a class="btn" href="${esc(p.github)}" target="_blank" rel="noopener">GitHub ↗</a>`:""}${p.live?`<a class="btn primary" href="${esc(p.live)}" target="_blank" rel="noopener">Live demo ↗</a>`:""}<span class="empty">${!p.github&&!p.live?"Add this project's repository or live demo URL in the PROJECTS data to show a link here.":""}</span></div></div></section>`}
+function contactPage(){app.innerHTML=`<section id="contact" style="border-top:0"><div class="contact-panel"><div><div class="kicker">Say hello</div><h2>Let's talk.</h2><p>For collaborations, project feedback or a good technical conversation.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me ↗</a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub ↗</a><a class="btn" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a></div></div></section>`}
+function route(){const hash=location.hash.slice(1)||"home";if(hash.startsWith("project=")){detailPage(decodeURIComponent(hash.slice(8)));setTab("projects")}else if(hash==="projects"){projectsPage();setTab("projects")}else if(hash==="about"){home();setTab("about");setTimeout(()=>$("#about")?.scrollIntoView(),0)}else if(hash==="contact"){contactPage();setTab("contact")}else{home();setTab("home")}document.title=(hash.startsWith("project=")?PROJECTS.find(p=>p.id===decodeURIComponent(hash.slice(8)))?.title+" — ":"")+"Kik — CS student & builder";window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});observeReveals()}
+function setTab(tab){document.querySelectorAll("[data-tab]").forEach(a=>a.toggleAttribute("aria-current",a.dataset.tab===tab))}
+addEventListener("hashchange",route);
+const root=document.documentElement,themeBtn=$("#theme");
+function setTheme(t,save){root.dataset.theme=t;themeBtn.textContent=t==="dark"?"☼ Light":"☾ Dark";if(save){try{localStorage.setItem("portfolio-theme",t)}catch(e){}}}
+let theme="dark";try{theme=localStorage.getItem("portfolio-theme")||"dark"}catch(e){}setTheme(theme,false);
+themeBtn.onclick=()=>setTheme(root.dataset.theme==="dark"?"light":"dark",true);
+$("#year").textContent=new Date().getFullYear();
+let revealObserver;
+function observeReveals(){if(revealObserver)revealObserver.disconnect();if("IntersectionObserver"in window){revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");revealObserver.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el))}else document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"))}
 route();
 </script>
 </body>
