@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kik | Computer Science student and builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F6F4;--surface:#FFFFFF;--ink:#17201D;--muted:#5A6762;--line:#DCE1DE;--accent:#2B4FD8;--accent-ink:#fff;color-scheme:light}
+:root[data-theme="dark"]{--bg:#101413;--surface:#171C1A;--ink:#E7EDEA;--muted:#9AA7A1;--line:#26302C;--accent:#8FA6FF;--accent-ink:#0E1330;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 Figtree,system-ui,sans-serif}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.5rem}
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
+nav{display:flex;align-items:center;gap:1.5rem;height:3.75rem}
+nav .brand{font-weight:700;text-decoration:none;margin-right:auto}
+nav a.tab{text-decoration:none;color:var(--muted);padding:.25rem 0;border-bottom:2px solid transparent}
+nav a.tab:hover,nav a.tab[aria-current]{color:var(--ink);border-color:var(--accent)}
+button,.btn{font:inherit;cursor:pointer}
+.icon-btn{background:none;border:1px solid var(--line);color:var(--ink);border-radius:.5rem;padding:.3rem .7rem;font-size:.9rem}
+.icon-btn:hover{border-color:var(--ink)}
+.btn{display:inline-block;text-decoration:none;font-weight:600;padding:.65rem 1.1rem;border-radius:.5rem;border:1px solid var(--ink)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:hover{filter:brightness(1.08)}
+.hero{padding:5rem 0 4rem;max-width:40rem}
+h1{font-size:clamp(2.2rem,5vw,3.25rem);line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
+.hero p{color:var(--muted);margin:0 0 1rem}
+.row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
+section{padding:3rem 0;border-top:1px solid var(--line)}
+h2{font-size:1.6rem;margin:0 0 .5rem;letter-spacing:-.01em}
+.lede{color:var(--muted);margin:0 0 1.5rem}
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{background:none;border:1px solid var(--line);color:var(--muted);border-radius:2rem;padding:.3rem .9rem;font-size:.95rem}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.domain{margin-bottom:2.5rem}
+.domain h3{font-size:1.15rem;margin:0 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:1rem}
+.card{display:flex;flex-direction:column;gap:.6rem;background:var(--surface);border:1px solid var(--line);border-radius:.5rem;padding:1.1rem;text-decoration:none}
+.card:hover{border-color:var(--accent)}
+.card h4{margin:0;font-size:1.05rem}
+.card p{margin:0;color:var(--muted);font-size:.97rem;flex:1}
+.empty{color:var(--muted);font-style:italic}
+.badges{display:flex;flex-wrap:wrap;gap:.35rem}
+.badge{display:inline-flex;font-size:.78rem;font-weight:600;border-radius:.25rem;overflow:hidden;line-height:1}
+.badge span{padding:.3rem .4rem;background:#3b4440;color:#fff}
+.badge b{padding:.3rem .5rem;color:#fff;font-weight:600}
+.back{display:inline-block;margin:2rem 0 1rem;color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.25rem 0 2rem}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem}
+.shots img,.shot-ph{width:100%;aspect-ratio:16/10;object-fit:cover;border:1px solid var(--line);border-radius:.5rem;background:var(--surface)}
+.shot-ph{display:grid;place-items:center;color:var(--muted);font-size:.9rem}
+.meta{color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:2rem 0;color:var(--muted);font-size:.95rem}
+@media (max-width:34rem){nav{gap:.9rem}.hero{padding-top:3rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav aria-label="Main">
+  <a class="brand" href="#home">Kik</a>
+  <a class="tab" href="#home" data-tab="home">Home</a>
+  <a class="tab" href="#projects" data-tab="projects">Projects</a>
+  <a class="tab" href="#contact" data-tab="contact">Contact</a>
+  <button class="icon-btn" id="theme" aria-label="Switch colour theme">Dark</button>
+</nav></div></header>
+
+<main class="wrap" id="app"></main>
+<footer><div class="wrap">Built with plain HTML, CSS and JavaScript.</div></footer>
+
+<script>
+/* ===== EDIT THIS SECTION ===== */
+const PROFILE = {
+  name: "Kik",
+  intro: "I'm a computer science student who likes building things that work end to end. Most of my projects are small systems I wanted to exist: a legal chatbot, a document scanner, a monitoring dashboard.",
+  more: "I study operating systems, databases and web development, and I'm learning more about DevOps and applied AI. I share what I build on GitHub.",
+  email: "you@example.com",
+  github: "https://github.com/your-username",
+  linkedin: "https://linkedin.com/in/your-username",
+  resume: "resume.pdf"   // put your resume file next to index.html
+};
+
+const DOMAINS = ["AI / Agents", "Mobile", "CV / Privacy", "Full-Stack / DevOps"];
+
+// Badge colours for the tech stack
+const TECH = {Python:"#3776AB",Kotlin:"#7F52FF",TypeScript:"#3178C6",JavaScript:"#B8860B",Docker:"#2496ED",FastAPI:"#009688",Flask:"#444444",OpenCV:"#5C3EE8",Prometheus:"#E6522C",Grafana:"#F46800",React:"#2A9DBF","Node.js":"#4E8F3A"};
+
+// links and images are optional: leave "" or [] to hide them
+const PROJECTS = [
+ {id:"lexai", title:"LexAI", domain:"AI / Agents",
+  summary:"A chatbot that answers questions about Indian law in plain language.",
+  details:"Explain the problem, how retrieval and prompting work, and what you learned. Replace this text with your own write-up.",
+  stack:["Python","FastAPI"], github:"", linkedin:"", live:"", images:[]},
+ {id:"cyberbullying", title:"Cyberbullying detection in Hinglish", domain:"AI / Agents",
+  summary:"Research on detecting abusive text that mixes Hindi and English.",
+  details:"Describe the dataset, the models you compared and the results.",
+  stack:["Python"], github:"", linkedin:"", live:"", images:[]},
+ {id:"scanner", title:"Smart Document Scanner", domain:"CV / Privacy",
+  summary:"Scans photos of documents into clean pages using image processing and AI.",
+  details:"Group project for the AI course. Describe your part, the pipeline and the demo.",
+  stack:["Python","OpenCV"], github:"", linkedin:"", live:"", images:[]},
+ {id:"observatory", title:"OS Observatory", domain:"Full-Stack / DevOps",
+  summary:"A dashboard that shows live system metrics, with Prometheus and Grafana behind it.",
+  details:"Describe the architecture, how it runs in Docker and how you stress-tested it.",
+  stack:["Python","Flask","Docker","Prometheus","Grafana"], github:"", linkedin:"", live:"", images:[]},
+ {id:"tradenest", title:"Tradenest", domain:"Full-Stack / DevOps",
+  summary:"A wholesale marketplace for businesses, built for a hackathon.",
+  details:"Describe what the team built in the time you had and your role.",
+  stack:["TypeScript"], github:"", linkedin:"", live:"", images:[]},
+ {id:"converter", title:"File converter extension", domain:"Full-Stack / DevOps",
+  summary:"A browser extension that converts images and documents without leaving the tab.",
+  details:"Describe supported formats and how conversion works.",
+  stack:["JavaScript"], github:"", linkedin:"", live:"", images:[]}
+];
+/* ===== END EDIT SECTION ===== */
+
+const $ = s => document.querySelector(s);
+const app = $("#app");
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+const badges = stack => `<div class="badges">${stack.map(t =>
+  `<span class="badge"><span>stack</span><b style="background:${TECH[t]||"#555"}">${esc(t)}</b></span>`).join("")}</div>`;
+
+function home(){
+  app.innerHTML = `
+  <div class="hero">
+    <h1>Hi, I'm ${esc(PROFILE.name)}.</h1>
+    <p>${esc(PROFILE.intro)}</p>
+    <p>${esc(PROFILE.more)}</p>
+    <div class="row">
+      <a class="btn primary" href="${esc(PROFILE.resume)}" download>Download resume</a>
+      <a class="btn" href="#projects">See projects</a>
+    </div>
+  </div>
+  <section><h2>Recent projects</h2><p class="lede">A few of the things I've built.</p>
+    <div class="grid">${PROJECTS.slice(0,3).map(card).join("")}</div></section>`;
+}
+
+function card(p){
+  return `<a class="card" href="#p-${p.id}"><h4>${esc(p.title)}</h4><p>${esc(p.summary)}</p>${badges(p.stack)}</a>`;
+}
+
+let filter = "All";
+function projects(){
+  const chips = ["All",...DOMAINS].map(d =>
+    `<button class="chip" aria-pressed="${d===filter}" data-f="${esc(d)}">${esc(d)}</button>`).join("");
+  const groups = DOMAINS.filter(d => filter==="All" || d===filter).map(d => {
+    const list = PROJECTS.filter(p => p.domain===d);
+    return `<div class="domain"><h3>${esc(d)}</h3>${list.length
+      ? `<div class="grid">${list.map(card).join("")}</div>`
+      : `<p class="empty">No projects here yet.</p>`}</div>`;
+  }).join("");
+  app.innerHTML = `<section style="border:0"><h2>Projects</h2>
+    <p class="lede">Grouped by domain. Open a project for details, screenshots and links.</p>
+    <div class="filters" role="group" aria-label="Filter by domain">${chips}</div>${groups}</section>`;
+  app.querySelectorAll(".chip").forEach(b => b.onclick = () => { filter = b.dataset.f; projects(); });
+}
+
+function detail(p){
+  const links = [["GitHub",p.github],["LinkedIn post",p.linkedin],["Live site",p.live]]
+    .filter(l => l[1]).map(l => `<a class="btn" href="${esc(l[1])}" target="_blank" rel="noopener">${l[0]}</a>`).join("");
+  const shots = p.images.length
+    ? p.images.map(src => `<img src="${esc(src)}" alt="${esc(p.title)} screenshot" loading="lazy">`).join("")
+    : `<div class="shot-ph">Add screenshots in the images list</div>`;
+  app.innerHTML = `<a class="back" href="#projects">Back to projects</a>
+    <h1 style="font-size:2.4rem">${esc(p.title)}</h1>
+    <p class="meta">${esc(p.domain)}</p>${badges(p.stack)}
+    <p style="max-width:42rem;margin-top:1.25rem">${esc(p.details)}</p>
+    <div class="links">${links || `<span class="empty">Add GitHub, LinkedIn or a live link to show buttons here.</span>`}</div>
+    <div class="shots">${shots}</div>`;
+}
+
+function contact(){
+  app.innerHTML = `<section style="border:0"><h2>Contact</h2>
+    <p class="lede">The quickest way to reach me is email.</p>
+    <div class="row" style="margin-top:0">
+      <a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me</a>
+      <a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="${esc(PROFILE.resume)}" download>Download resume</a>
+    </div></section>`;
+}
+
+function route(){
+  const h = location.hash.slice(1) || "home";
+  let tab = h;
+  if (h.startsWith("p-")) {
+    const p = PROJECTS.find(x => "p-"+x.id===h);
+    if (p) { detail(p); tab = "projects"; } else { home(); tab = "home"; }
+  } else if (h==="projects") projects();
+  else if (h==="contact") contact();
+  else { home(); tab = "home"; }
+  document.querySelectorAll("[data-tab]").forEach(a =>
+    a.toggleAttribute("aria-current", a.dataset.tab===tab));
+  document.title = (h.startsWith("p-") && PROJECTS.find(x=>"p-"+x.id===h)?.title || "Kik") + " | Portfolio";
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange", route);
+
+// Theme: follows system, remembers choice
+const root = document.documentElement, tbtn = $("#theme");
+function setTheme(t, save){
+  root.dataset.theme = t; tbtn.textContent = t==="dark" ? "Light" : "Dark";
+  if (save) { try { localStorage.setItem("theme", t); } catch(e){} }
+}
+let saved = null; try { saved = localStorage.getItem("theme"); } catch(e){}
+setTheme(saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"), false);
+tbtn.onclick = () => setTheme(root.dataset.theme==="dark" ? "light" : "dark", true);
+
+route();
+</script>
+</body>
+</html>
