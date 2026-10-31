@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b1015">
 <meta name="description" content="Kshitij — Computer science student building useful software across AI, systems, privacy, mobile and the web.">
 <title>Kshitij — CS student & builder</title>
@@ -31,7 +31,7 @@ nav a.tab:hover,nav a.tab[aria-current]{color:var(--ink)}
 nav a.tab:hover:after,nav a.tab[aria-current]:after{transform:scaleX(1)}
 .nav-right{display:flex;align-items:center;gap:10px}
 .pill-button{border:1px solid var(--line);background:var(--panel);padding:8px 13px;border-radius:999px;font-size:.82rem;transition:transform .2s,border-color .2s}
-.pill-button:hover{transform:translateY(-2px);border-color:var(--accent)}
+.pill-button:hover{transform:translate(var(--bx,0px),calc(var(--by,0px) - 2px));border-color:var(--accent)}
 .hero{position:relative;isolation:isolate;min-height:590px;display:grid;grid-template-columns:1.35fr .65fr;align-items:center;gap:55px;padding:85px 0 75px}
 .hero>*:not(.halo){position:relative;z-index:1}
 .halo{position:absolute;inset:0 -20px;width:calc(100% + 40px);height:100%;z-index:0;pointer-events:none;opacity:.9}
@@ -47,7 +47,7 @@ h1{font-size:clamp(3.1rem,7vw,6.4rem);letter-spacing:-.085em;line-height:.99;mar
 .hero-copy strong{color:var(--ink);font-weight:600}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:var(--panel);font-weight:700;font-size:.9rem;transition:transform .2s,border-color .2s,background .2s}
-.btn:hover{transform:translateY(-3px);border-color:var(--accent)}
+.btn:hover{transform:translate(var(--bx,0px),calc(var(--by,0px) - 3px));border-color:var(--accent)}
 .btn span{display:inline-block;transition:transform .2s}
 .btn:hover span{transform:translate(2px,-2px)}
 .btn.primary{background:var(--accent);color:#07140f;border-color:var(--accent)}
@@ -86,7 +86,7 @@ h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.07em;margin-b
 .project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
 .project{display:flex;flex-direction:column;min-height:270px;padding:21px;border:1px solid var(--line);border-radius:18px;background:var(--panel);text-decoration:none;position:relative;overflow:hidden;transition:transform .25s,border-color .25s,background .25s,opacity .65s ease}
 .project:before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,100%) var(--my,0),color-mix(in srgb,var(--accent) 14%,transparent),transparent 60%);opacity:0;transition:opacity .25s}
-.project:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--accent) 65%,var(--line));background:var(--panel2)}
+.project:hover{transform:perspective(900px) translateY(-6px) rotateX(var(--prx,0deg)) rotateY(var(--pry,0deg));border-color:color-mix(in srgb,var(--accent) 65%,var(--line));background:var(--panel2)}
 .project:hover:before{opacity:1}
 .project>*{position:relative}
 .project-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:23px}
@@ -117,7 +117,7 @@ footer{padding:27px 0 35px;color:var(--muted);font-size:.8rem}
 footer a{color:var(--ink);text-decoration:none}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.project.reveal.visible:hover{transform:translateY(-6px)}
+.project.reveal.visible:hover{transform:perspective(900px) translateY(-6px) rotateX(var(--prx,0deg)) rotateY(var(--pry,0deg))}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes dropIn{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
 @keyframes riseIn{from{transform:translateY(105%)}to{transform:none}}
@@ -126,28 +126,97 @@ footer a{color:var(--ink);text-decoration:none}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.8)}}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---- v3 motion layer (same tokens, both themes) ---- */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.aurora{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+.aurora i{position:absolute;width:46vmax;height:46vmax;border-radius:50%;filter:blur(90px);opacity:.15;will-change:transform}
+.aurora i:nth-child(1){background:var(--accent);top:-20vmax;left:-14vmax;animation:drift1 26s ease-in-out infinite alternate}
+.aurora i:nth-child(2){background:var(--accent2);top:10vmax;right:-18vmax;animation:drift2 32s ease-in-out infinite alternate}
+.aurora i:nth-child(3){background:var(--accent);width:32vmax;height:32vmax;bottom:-16vmax;left:30vw;opacity:.08;animation:drift1 38s ease-in-out infinite alternate-reverse}
+:root[data-theme="light"] .aurora i{opacity:.09}
+.hero:before{content:"";position:absolute;inset:0 -20px;z-index:-1;pointer-events:none;background-image:radial-gradient(color-mix(in srgb,var(--ink) 16%,transparent) 1px,transparent 1.3px);background-size:26px 26px;-webkit-mask-image:radial-gradient(ellipse at 30% 40%,#000,transparent 70%);mask-image:radial-gradient(ellipse at 30% 40%,#000,transparent 70%);opacity:.55}
+.profile-card:before{content:"";position:absolute;inset:-1px;border-radius:27px;padding:1px;background:conic-gradient(from var(--ang),transparent 0 68%,var(--accent) 86%,var(--accent2) 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:ang 7s linear infinite;pointer-events:none}
+.btn,.pill-button{transform:translate(var(--bx,0px),var(--by,0px))}
+.btn.primary{position:relative;overflow:hidden}
+.btn.primary:after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,#fff7,transparent);transform:skewX(-20deg);transition:left .7s ease;pointer-events:none}
+.btn.primary:hover:after{left:130%}
+.marquee{overflow:hidden;padding:0 0 38px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.track{display:flex;width:max-content;animation:marq 40s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.marquee .skill{margin-right:12px;padding:9px 16px;font-size:.85rem;white-space:nowrap;border-radius:999px}
+.info-panel.visible .skill{animation:pop .5s calc(var(--i,0)*40ms) cubic-bezier(.2,.7,.2,1) backwards}
+#app.page-in{animation:pageIn .55s cubic-bezier(.2,.7,.2,1)}
+.theming,.theming *,.theming *:before,.theming *:after{transition:background-color .5s ease,color .5s ease,border-color .5s ease,box-shadow .5s ease!important}
+@keyframes drift1{to{transform:translate(9vmax,7vmax) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-10vmax,9vmax) scale(.9)}}
+@keyframes ang{to{--ang:360deg}}
+@keyframes marq{to{transform:translateX(-50%)}}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.9)}}
+@keyframes pageIn{from{opacity:0;filter:blur(6px);transform:translateY(10px)}}
+@media(max-width:650px){.profile-card:before{display:none}}
+@media(prefers-reduced-motion:reduce){.aurora i,.floaters{display:none}}
 @media(max-width:850px){.hero{grid-template-columns:1fr .7fr;gap:28px}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{min-height:520px}}
 @media(max-width:650px){.wrap{width:min(100% - 28px,1100px)}nav{height:64px;gap:15px}.brand{font-size:1.15rem}nav a.tab{font-size:.8rem}.nav-right .pill-button{padding:7px 9px}.hero{display:flex;flex-direction:column;align-items:stretch;padding:65px 0 55px;gap:35px;min-height:unset}.hero h1{font-size:clamp(3.2rem,15vw,5rem)}.profile-card,.profile-card:hover{max-width:430px;transform:none;width:100%;align-self:center}.section-head{display:block}.section-head .lede{margin-top:10px}.about-grid{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}.project{min-height:230px}.contact-panel{display:block}.contact-panel .actions{margin-top:22px}.footer-inner{align-items:flex-start;flex-direction:column;gap:5px}}
 @media(max-width:390px){nav{gap:10px}.brand-mark{width:29px;height:29px}.brand{gap:7px}nav a.tab{font-size:.74rem}.nav-right .pill-button{font-size:.72rem}}
+
+/* ---- v4: quirks + responsive ---- */
+.hero>.floaters{position:absolute;inset:0;pointer-events:none;z-index:0}
+.floaters span{position:absolute;font:500 1.5rem "DM Mono",monospace;color:var(--accent);opacity:.24;transform:translate(calc(var(--px,0)*var(--d)*1px),calc(var(--py,0)*var(--d)*1px));transition:transform .45s ease-out;animation:bob 6s ease-in-out infinite}
+.floaters span:nth-child(even){color:var(--accent2);animation-duration:8s;animation-delay:-2s}
+.typer{margin-top:18px;font:500 .95rem "DM Mono",monospace;color:var(--ink);min-height:1.7em}
+.typer .pr{color:var(--accent)}
+.caret{display:inline-block;width:8px;height:1.05em;margin-left:3px;vertical-align:-.17em;background:var(--accent);animation:blink 1s steps(1) infinite}
+.card-symbol{cursor:pointer}
+.btn{position:relative;overflow:hidden}
+.rip{position:absolute;width:140px;height:140px;margin:-70px 0 0 -70px;border-radius:50%;background:currentColor;opacity:.2;transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+.tag{transition:border-color .2s,color .2s}
+.tag:hover{animation:wig .4s;border-color:var(--accent);color:var(--ink)}
+.hint{opacity:.7;font-style:italic}
+.party{animation:hue 8s linear infinite}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);padding:10px 16px;border-radius:999px;background:var(--panel);border:1px solid var(--accent);font:.8rem "DM Mono",monospace;z-index:60;white-space:nowrap;animation:toast 2.6s ease both}
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.1rem;z-index:25;opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .3s,transform .3s,border-color .2s}
+.totop.show{opacity:1;pointer-events:auto;transform:none}
+.totop:hover{border-color:var(--accent);transform:translateY(-4px)}
+header{padding-top:env(safe-area-inset-top)}
+footer{padding-bottom:calc(35px + env(safe-area-inset-bottom))}
+nav a.tab{padding:8px 0}
+nav a.tab:after{bottom:2px}
+@keyframes bob{50%{translate:0 -14px}}
+@keyframes blink{50%{opacity:0}}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+@keyframes wig{25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,14px)}10%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,8px)}}
+@media(min-width:1400px){.wrap{width:min(1240px,calc(100% - 80px))}.project-grid{gap:18px}.hero{min-height:640px}}
+@media(max-width:1024px){.hero{gap:36px}.hero h1{font-size:clamp(3rem,7.5vw,5.4rem)}}
+@media(max-width:850px){section{padding:56px 0}.hero{padding:64px 0 56px}.section-head{gap:16px}.contact-panel{gap:20px}}
+@media(max-width:650px){section{padding:48px 0}.hero h1{font-size:clamp(2.5rem,12.5vw,4.4rem)}.hero-copy{font-size:1rem}.actions .btn{flex:1 1 auto}.chip{padding:9px 14px}.floaters span:nth-child(n+4){display:none}.stat-row{gap:8px}.typer{font-size:.85rem}.section-head .btn{margin-top:14px}.totop{width:42px;height:42px}}
+@media(max-width:480px){.brand-name{display:none}nav{gap:14px}.pill-button .tl{display:none}.pill-button{padding:8px 12px}.stat span{font-size:.62rem}.profile-card{padding:20px}.project{padding:18px;min-height:0}.info-panel{padding:20px}.contact-panel{padding:24px 20px}.hint{display:none}.nav-right{margin-left:auto}nav .brand{margin-right:0}}
+@media(max-width:340px){nav{gap:9px}nav a.tab{font-size:.68rem}.hero h1{font-size:2.3rem}}
+@media(max-height:500px) and (orientation:landscape){.hero{min-height:unset;padding:36px 0}}
+@media(hover:none){.project:hover{transform:none}.profile-card:hover{transform:perspective(900px) rotate(2deg)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.halo{display:none}}
 </style>
 </head>
 <body>
 <div id="progress" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 <header><div class="wrap"><nav aria-label="Main navigation">
-<a class="brand" href="#home"><span class="brand-mark">K</span>Kshitij</a>
+<a class="brand" href="#home"><span class="brand-mark">K</span><span class="brand-name">Kshitij</span></a>
 <a class="tab" href="#home" data-tab="home">Home</a><a class="tab" href="#projects" data-tab="projects">Projects</a><a class="tab" href="#about" data-tab="about">About</a><a class="tab" href="#contact" data-tab="contact">Contact</a>
 <div class="nav-right"><button class="pill-button" id="theme" type="button" aria-label="Toggle colour theme">☼ Light</button></div>
 </nav></div></header>
 <main class="wrap" id="app"></main>
-<footer><div class="wrap footer-inner"><span>Designed and built with HTML, CSS & JavaScript.</span><span>© <span id="year"></span> Kshitij · <a href="#home">Back to top ↑</a></span></div></footer>
+<footer><div class="wrap footer-inner"><span>Designed and built with HTML, CSS & JavaScript. <span class="hint" title="↑ ↑ ↓ ↓ ← → ← → B A">psst… try the Konami code.</span></span><span>© <span id="year"></span> Kshitij · <a href="#home">Back to top ↑</a></span></div></footer>
+<button class="totop" id="totop" type="button" aria-label="Back to top">↑</button>
 <script>
 const PROFILE={
  name:"Kshitij",
  intro:"Computer science student, curious builder, and fan of software that works end to end.",
  more:"I build across applied AI, privacy, operating systems, mobile apps and developer tools. I like understanding how things work, then turning that curiosity into something people can actually use.",
- email:"you@example.com",
- github:"https://github.com/your-username",
+ email:"kshitijsdeshpande.com",
+ github:"https://github.com/DeveloperKSD",
  linkedin:"https://linkedin.com/in/your-username",
  resume:"resume.pdf"
 };
@@ -173,29 +242,31 @@ const PROJECTS=[
 ];
 const DOMAINS=["All","AI / Agents","CV / Privacy","Mobile","Systems / DevOps","Full-Stack","Algorithms"];
 const $=s=>document.querySelector(s),app=$("#app");
-const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
+const TOOLS=["Python","C++","JavaScript","TypeScript","Kotlin","Flask","FastAPI","React","Docker","Prometheus","Grafana","OpenCV","scikit-learn","PostgreSQL","Git"];
+const marquee=()=>{const r=TOOLS.map(x=>`<span class="skill">${x}</span>`).join("");return `<div class="marquee reveal" aria-hidden="true"><div class="track">${r}${r}</div></div>`};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const tags=arr=>`<div class="tags">${arr.slice(0,5).map(x=>`<span class="tag">${esc(x)}</span>`).join("")}</div>`;
 const iconFor=d=>({"AI / Agents":"✳","CV / Privacy":"◉","Mobile":"▣","Systems / DevOps":"▥","Full-Stack":"↗","Algorithms":"⌘"}[d]||"◇");
 function projectCard(p){return `<a class="project reveal" href="#project=${encodeURIComponent(p.id)}"><div class="project-top"><span class="project-icon">${p.icon||iconFor(p.domain)}</span><span class="project-domain">${esc(p.domain)}</span></div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p>${tags(p.stack)}<span class="project-arrow">↗</span></a>`}
-function home(){app.innerHTML=`<section class="hero" id="home" style="border:0"><canvas class="halo" aria-hidden="true"></canvas><div class="reveal"><div class="eyebrow">Computer science · Mumbai, India</div><h1><span class="line"><span>Building things</span></span><span class="line"><span>that <span class="gradient">make sense.</span></span></span></h1><p class="hero-copy">Hey, I'm <strong>${esc(PROFILE.name)}</strong> — ${esc(PROFILE.intro)} ${esc(PROFILE.more)}</p><div class="actions"><a class="btn primary" href="#projects">Explore my work <span>↗</span></a><a class="btn" href="#contact">Get in touch</a></div></div><aside class="profile-card reveal"><div class="profile-top"><span class="status"><span class="dot"></span> Curious by default</span><span class="project-domain">PROFILE_001</span></div><div class="card-symbol"><span class="symbol">{k}</span></div><h3>Software, systems & AI</h3><p>Learning by building, debugging and shipping.</p><div class="stat-row"><div class="stat"><b data-count="${PROJECTS.length}">${PROJECTS.length}</b><span>Projects listed</span></div><div class="stat"><b data-count="6">6</b><span>Core domains</span></div><div class="stat"><b>∞</b><span>Things to learn</span></div></div></aside></section>
-<section id="featured"><div class="section-head reveal"><div><div class="kicker">Selected work</div><h2>Some things I've built.</h2><p class="lede">A mix of practical tools, experiments and projects that helped me learn how the pieces fit together.</p></div><a class="btn" href="#projects">All projects <span>↗</span></a></div><div class="project-grid">${PROJECTS.slice(0,6).map(projectCard).join("")}</div></section>
-<section id="about"><div class="section-head reveal"><div><div class="kicker">A little about me</div><h2>Curiosity, then code.</h2><p class="lede">I enjoy projects where I can work across the stack and understand the system behind the interface.</p></div></div><div class="about-grid"><article class="info-panel reveal"><h3>What I’m exploring</h3><p>Applied AI and retrieval, privacy-aware browser tools, operating systems, backend development, automation and local-first software. I’m also learning more about DevOps and cloud workflows.</p></article><article class="info-panel reveal"><h3>Tools I use</h3><div class="skill-list">${["Python","C++","JavaScript","TypeScript","Kotlin","Flask","FastAPI","React","Docker","Prometheus","Grafana","OpenCV","scikit-learn","PostgreSQL","Git"].map(x=>`<span class="skill">${x}</span>`).join("")}</div></article></div></section>
+function home(){app.innerHTML=`<section class="hero" id="home" style="border:0"><canvas class="halo" aria-hidden="true"></canvas><div class="floaters" aria-hidden="true"><span style="--d:.03;top:12%;left:48%">✳</span><span style="--d:-.05;top:72%;left:42%">⌘</span><span style="--d:.07;top:18%;right:1%">◇</span><span style="--d:-.03;bottom:6%;left:3%">▥</span><span style="--d:.05;top:46%;left:-1%">{ }</span></div><div class="reveal"><div class="eyebrow">Computer science · Mumbai, India</div><h1><span class="line"><span>Building things</span></span><span class="line"><span>that <span class="gradient">make sense.</span></span></span></h1><p class="hero-copy">Hey, I'm <strong>${esc(PROFILE.name)}</strong> — ${esc(PROFILE.intro)} ${esc(PROFILE.more)}</p><div class="typer" aria-label="Currently doing"><span class="pr">&gt;</span> <span id="typed"></span><i class="caret"></i></div><div class="actions"><a class="btn primary" href="#projects">Explore my work <span>↗</span></a><a class="btn" href="#contact">Get in touch</a></div></div><aside class="profile-card reveal"><div class="profile-top"><span class="status"><span class="dot"></span> Curious by default</span><span class="project-domain">PROFILE_001</span></div><div class="card-symbol"><span class="symbol">{k}</span></div><h3>Software, systems & AI</h3><p>Learning by building, debugging and shipping.</p><div class="stat-row"><div class="stat"><b data-count="${PROJECTS.length}">${PROJECTS.length}</b><span>Projects listed</span></div><div class="stat"><b data-count="6">6</b><span>Core domains</span></div><div class="stat"><b>∞</b><span>Things to learn</span></div></div></aside></section>
+${marquee()}<section id="featured"><div class="section-head reveal"><div><div class="kicker">Selected work</div><h2>Some things I've built.</h2><p class="lede">A mix of practical tools, experiments and projects that helped me learn how the pieces fit together.</p></div><a class="btn" href="#projects">All projects <span>↗</span></a></div><div class="project-grid">${PROJECTS.slice(0,6).map(projectCard).join("")}</div></section>
+<section id="about"><div class="section-head reveal"><div><div class="kicker">A little about me</div><h2>Curiosity, then code.</h2><p class="lede">I enjoy projects where I can work across the stack and understand the system behind the interface.</p></div></div><div class="about-grid"><article class="info-panel reveal"><h3>What I’m exploring</h3><p>Applied AI and retrieval, privacy-aware browser tools, operating systems, backend development, automation and local-first software. I’m also learning more about DevOps and cloud workflows.</p></article><article class="info-panel reveal"><h3>Tools I use</h3><div class="skill-list">${TOOLS.map((x,i)=>`<span class="skill" style="--i:${i}">${x}</span>`).join("")}</div></article></div></section>
 <section id="contact"><div class="contact-panel reveal"><div><div class="kicker">Have something in mind?</div><h2>Let's build something useful.</h2><p>Open to learning, collaborating and talking about interesting projects.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me <span>↗</span></a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub <span>↗</span></a></div></div></section>`}
 let activeFilter="All";
 function projectsPage(){const list=PROJECTS.filter(p=>activeFilter==="All"||p.domain===activeFilter);app.innerHTML=`<section id="projects" style="border-top:0"><div class="section-head reveal"><div><div class="kicker">The workbench</div><h2>Projects</h2><p class="lede">Browse projects by area. Open any card for a little more detail.</p></div><span class="project-domain">${list.length} PROJECTS</span></div><div class="filters" role="group" aria-label="Filter projects">${DOMAINS.map(d=>`<button class="chip" data-filter="${esc(d)}" aria-pressed="${d===activeFilter}">${esc(d)}</button>`).join("")}</div><div class="project-grid">${list.map(projectCard).join("")}</div></section>`;app.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{activeFilter=b.dataset.filter;projectsPage()});observeReveals();}
 function detailPage(id){const p=PROJECTS.find(x=>x.id===id);if(!p){home();return}app.innerHTML=`<section style="border-top:0"><a class="btn" href="#projects">← Back to projects</a><div class="project-detail"><div class="detail-head"><div><div class="kicker">${esc(p.domain)}${p.status?" · "+esc(p.status):""}</div><h3>${esc(p.title)}</h3></div><span class="project-icon">${p.icon||iconFor(p.domain)}</span></div><p>${esc(p.details)}</p><h4>What it includes</h4><ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join("")}</ul><h4>Tech stack</h4>${tags(p.stack)}<div class="detail-links">${p.github?`<a class="btn" href="${esc(p.github)}" target="_blank" rel="noopener">GitHub ↗</a>`:""}${p.live?`<a class="btn primary" href="${esc(p.live)}" target="_blank" rel="noopener">Live demo ↗</a>`:""}<span class="empty">${!p.github&&!p.live?"Add this project's repository or live demo URL in the PROJECTS data to show a link here.":""}</span></div></div></section>`}
 function contactPage(){app.innerHTML=`<section id="contact" style="border-top:0"><div class="contact-panel"><div><div class="kicker">Say hello</div><h2>Let's talk.</h2><p>For collaborations, project feedback or a good technical conversation.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me <span>↗</span></a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub <span>↗</span></a><a class="btn" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">LinkedIn <span>↗</span></a></div></div></section>`}
-function route(){const hash=location.hash.slice(1)||"home";if(hash.startsWith("project=")){detailPage(decodeURIComponent(hash.slice(8)));setTab("projects")}else if(hash==="projects"){projectsPage();setTab("projects")}else if(hash==="about"){home();setTab("about");setTimeout(()=>$("#about")?.scrollIntoView(),0)}else if(hash==="contact"){contactPage();setTab("contact")}else{home();setTab("home")}document.title=(hash.startsWith("project=")?PROJECTS.find(p=>p.id===decodeURIComponent(hash.slice(8)))?.title+" — ":"")+"Kshitij — CS student & builder";window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});observeReveals();initHalo();initExtras()}
+function route(){const hash=location.hash.slice(1)||"home";if(hash.startsWith("project=")){detailPage(decodeURIComponent(hash.slice(8)));setTab("projects")}else if(hash==="projects"){projectsPage();setTab("projects")}else if(hash==="about"){home();setTab("about");setTimeout(()=>$("#about")?.scrollIntoView(),0)}else if(hash==="contact"){contactPage();setTab("contact")}else{home();setTab("home")}document.title=(hash.startsWith("project=")?PROJECTS.find(p=>p.id===decodeURIComponent(hash.slice(8)))?.title+" — ":"")+"Kshitij — CS student & builder";window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});app.classList.remove("page-in");void app.offsetWidth;app.classList.add("page-in");observeReveals();initHalo();initExtras()}
 function setTab(tab){document.querySelectorAll("[data-tab]").forEach(a=>a.toggleAttribute("aria-current",a.dataset.tab===tab))}
 addEventListener("hashchange",route);
 const root=document.documentElement,themeBtn=$("#theme");
-function setTheme(t,save){root.dataset.theme=t;themeBtn.textContent=t==="dark"?"☼ Light":"☾ Dark";if(save){try{localStorage.setItem("portfolio-theme",t)}catch(e){}}}
+function setTheme(t,save){if(save){root.classList.add("theming");setTimeout(()=>root.classList.remove("theming"),650)}root.dataset.theme=t;themeBtn.innerHTML=t==="dark"?'☼<span class="tl"> Light</span>':'☾<span class="tl"> Dark</span>';if(save){try{localStorage.setItem("portfolio-theme",t)}catch(e){}}}
 let theme="dark";try{theme=localStorage.getItem("portfolio-theme")||"dark"}catch(e){}setTheme(theme,false);
 themeBtn.onclick=()=>setTheme(root.dataset.theme==="dark"?"light":"dark",true);
 $("#year").textContent=new Date().getFullYear();
 let revealObserver;
-function observeReveals(){if(revealObserver)revealObserver.disconnect();if("IntersectionObserver"in window){revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");revealObserver.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll(".reveal").forEach((el,i)=>{if(el.classList.contains("project"))el.style.transitionDelay=(i%3)*80+"ms";revealObserver.observe(el)})}else document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"))}
+function observeReveals(){if(revealObserver)revealObserver.disconnect();if("IntersectionObserver"in window){revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){const t=e.target;t.classList.add("visible");revealObserver.unobserve(t);if(!reduce){t.querySelectorAll(".kicker").forEach(scramble);if(t.classList.contains("project"))setTimeout(()=>t.style.transitionDelay="",900)}}}),{threshold:.08});document.querySelectorAll(".reveal").forEach((el,i)=>{if(el.classList.contains("project"))el.style.transitionDelay=(i%3)*80+"ms";revealObserver.observe(el)})}else document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"))}
 
 /* Chroma Halo style cursor ink (hero only) */
 function initHalo(){
@@ -234,7 +305,9 @@ function initHalo(){
 
 /* Extra motion: stat counters + profile card tilt */
 function initExtras(){
+  typer();parallax();
   if(reduce)return;
+  document.querySelectorAll(".eyebrow").forEach(scramble);
   document.querySelectorAll("[data-count]").forEach(el=>{
     const n=+el.dataset.count;let s=null;
     const step=ts=>{s??=ts;const p=Math.min((ts-s)/900,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1&&el.isConnected)requestAnimationFrame(step)};
@@ -250,10 +323,28 @@ function initExtras(){
 }
 
 /* Project card spotlight + scroll progress (set up once) */
-app.addEventListener("pointermove",e=>{const p=e.target.closest&&e.target.closest(".project");if(p){const r=p.getBoundingClientRect();p.style.setProperty("--mx",e.clientX-r.left+"px");p.style.setProperty("--my",e.clientY-r.top+"px")}});
-const bar=$("#progress");
-function progress(){const m=document.documentElement.scrollHeight-innerHeight;bar.style.transform="scaleX("+(m>0?Math.min(scrollY/m,1):0)+")"}
+app.addEventListener("pointermove",e=>{const p=e.target.closest&&e.target.closest(".project");if(p){const r=p.getBoundingClientRect();p.style.setProperty("--mx",e.clientX-r.left+"px");p.style.setProperty("--my",e.clientY-r.top+"px");if(fine&&!reduce){p.style.setProperty("--pry",((e.clientX-r.left)/r.width-.5)*8+"deg");p.style.setProperty("--prx",(.5-(e.clientY-r.top)/r.height)*8+"deg")}}});
+app.addEventListener("pointerout",e=>{const p=e.target.closest&&e.target.closest(".project");if(p&&!p.contains(e.relatedTarget)){p.style.removeProperty("--prx");p.style.removeProperty("--pry")}});
+const bar=$("#progress"),aur=$(".aurora"),totop=$("#totop");
+function progress(){const m=document.documentElement.scrollHeight-innerHeight;bar.style.transform="scaleX("+(m>0?Math.min(scrollY/m,1):0)+")";if(aur&&!reduce)aur.style.transform="translateY("+(scrollY*-.06)+"px)";totop.classList.toggle("show",scrollY>500)}
 addEventListener("scroll",progress,{passive:true});addEventListener("resize",progress);
+/* Text decode effect */
+function scramble(el){if(reduce)return;const t=el.dataset.t||(el.dataset.t=el.textContent),g="01<>/{}#$%&";let f=0;clearInterval(el._s);el._s=setInterval(()=>{f++;const k=Math.floor(f/1.5);el.textContent=[...t].map((c,i)=>c===" "||i<k?c:g[Math.random()*g.length|0]).join("");if(k>=t.length){clearInterval(el._s);el.textContent=t}},28)}
+/* Magnetic buttons + cursor ring */
+if(fine&&!reduce){
+  document.addEventListener("pointermove",e=>{const b=e.target.closest&&e.target.closest(".btn,.pill-button");if(b){const r=b.getBoundingClientRect();b.style.setProperty("--bx",(e.clientX-r.left-r.width/2)*.22+"px");b.style.setProperty("--by",(e.clientY-r.top-r.height/2)*.3+"px")}});
+  document.addEventListener("pointerout",e=>{const b=e.target.closest&&e.target.closest(".btn,.pill-button");if(b&&!b.contains(e.relatedTarget)){b.style.removeProperty("--bx");b.style.removeProperty("--by")}});
+}
+/* Quirks: typer, hero parallax, confetti, ripple, Konami, tab-title */
+function typer(){const el=$("#typed");if(!el)return;const W=["shipping side projects","debugging at 2am","teaching machines to read","breaking things (on purpose)","learning one more framework"];if(reduce){el.textContent=W[0];return}let w=0,i=0,del=false;(function step(){if(!el.isConnected)return;const word=W[w];i+=del?-1:1;el.textContent=word.slice(0,i);let d=del?32:70;if(!del&&i===word.length){del=true;d=1500}else if(del&&i===0){del=false;w=(w+1)%W.length;d=350}setTimeout(step,d)})()}
+function parallax(){const h=document.querySelector(".hero");if(!h||reduce||!fine)return;h.addEventListener("pointermove",e=>{const r=h.getBoundingClientRect();h.style.setProperty("--px",e.clientX-r.left-r.width/2);h.style.setProperty("--py",e.clientY-r.top-r.height/2)})}
+function burst(x,y){if(reduce)return;const c=["var(--accent)","var(--accent2)"];for(let i=0;i<22;i++){const s=document.createElement("i"),z=4+Math.random()*6;s.style.cssText=`position:fixed;left:${x}px;top:${y}px;width:${z}px;height:${z}px;border-radius:${i%3?"50%":"2px"};background:${c[i%2]};pointer-events:none;z-index:50`;document.body.appendChild(s);const a=Math.random()*6.283,v=70+Math.random()*130;s.animate([{transform:"translate(0,0) rotate(0)",opacity:1},{transform:`translate(${Math.cos(a)*v}px,${Math.sin(a)*v+60}px) rotate(${Math.random()*540}deg)`,opacity:0}],{duration:800+Math.random()*500,easing:"cubic-bezier(.2,.7,.3,1)"}).onfinish=()=>s.remove()}}
+function toast(m){const t=document.createElement("div");t.className="toast";t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest(".symbol,.brand-mark,.totop,.btn");if(!t)return;if(t.matches(".symbol,.brand-mark,.totop"))burst(e.clientX||innerWidth/2,e.clientY||innerHeight/2);if(t.matches(".btn")&&!reduce){const r=t.getBoundingClientRect(),i=document.createElement("span");i.className="rip";i.style.left=e.clientX-r.left+"px";i.style.top=e.clientY-r.top+"px";t.appendChild(i);i.onanimationend=()=>i.remove()}});
+totop.onclick=()=>scrollTo({top:0,behavior:reduce?"auto":"smooth"});
+const KON=["arrowup","arrowup","arrowdown","arrowdown","arrowleft","arrowright","arrowleft","arrowright","b","a"];let ki=0;
+addEventListener("keydown",e=>{const k=e.key.toLowerCase();ki=k===KON[ki]?ki+1:(k===KON[0]?1:0);if(ki===KON.length){ki=0;root.classList.toggle("party");toast(root.classList.contains("party")?"party mode on 🎉":"party mode off");burst(innerWidth/2,innerHeight/3)}});
+let savedTitle=document.title;document.addEventListener("visibilitychange",()=>{if(document.hidden){savedTitle=document.title;document.title="Come back, I made snacks 🍪"}else document.title=savedTitle});
 route();progress();
 </script>
 </body>
