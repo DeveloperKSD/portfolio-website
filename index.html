@@ -19,37 +19,48 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
 a{color:inherit}button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .wrap{width:min(1100px,calc(100% - 40px));margin:auto}
-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid color-mix(in srgb,var(--line) 75%,transparent)}
+#progress{position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform-origin:0 50%;transform:scaleX(0);z-index:30;pointer-events:none}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid color-mix(in srgb,var(--line) 75%,transparent);animation:dropIn .6s ease both}
 nav{height:72px;display:flex;align-items:center;gap:28px}
 .brand{font-weight:800;font-size:1.35rem;letter-spacing:-.08em;text-decoration:none;display:flex;align-items:center;gap:10px;margin-right:auto}
-.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--accent);color:#07130f;display:grid;place-items:center;font-size:.95rem;box-shadow:0 0 25px color-mix(in srgb,var(--accent) 20%,transparent)}
-nav a.tab{font-size:.9rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--accent);color:#07130f;display:grid;place-items:center;font-size:.95rem;box-shadow:0 0 25px color-mix(in srgb,var(--accent) 20%,transparent);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.brand:hover .brand-mark{transform:rotate(-12deg) scale(1.08)}
+nav a.tab{position:relative;font-size:.9rem;color:var(--muted);text-decoration:none;transition:color .2s}
+nav a.tab:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s}
 nav a.tab:hover,nav a.tab[aria-current]{color:var(--ink)}
+nav a.tab:hover:after,nav a.tab[aria-current]:after{transform:scaleX(1)}
 .nav-right{display:flex;align-items:center;gap:10px}
 .pill-button{border:1px solid var(--line);background:var(--panel);padding:8px 13px;border-radius:999px;font-size:.82rem;transition:transform .2s,border-color .2s}
 .pill-button:hover{transform:translateY(-2px);border-color:var(--accent)}
-.hero{min-height:590px;display:grid;grid-template-columns:1.35fr .65fr;align-items:center;gap:55px;padding:85px 0 75px}
+.hero{position:relative;isolation:isolate;min-height:590px;display:grid;grid-template-columns:1.35fr .65fr;align-items:center;gap:55px;padding:85px 0 75px}
+.hero>*:not(.halo){position:relative;z-index:1}
+.halo{position:absolute;inset:0 -20px;width:calc(100% + 40px);height:100%;z-index:0;pointer-events:none;opacity:.9}
 .eyebrow{font:500 .76rem "DM Mono",monospace;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);display:flex;align-items:center;gap:10px}
-.eyebrow:before{content:"";width:25px;height:1px;background:currentColor}
+.eyebrow:before{content:"";width:25px;height:1px;background:currentColor;animation:grow .9s .2s ease both;transform-origin:0 50%}
 h1,h2,h3,h4,p{margin-top:0}
 h1{font-size:clamp(3.1rem,7vw,6.4rem);letter-spacing:-.085em;line-height:.99;margin:22px 0 25px;font-weight:800}
-.gradient{background:linear-gradient(100deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.line{display:block;overflow:hidden;padding-bottom:.08em}
+.line>span{display:inline-block;animation:riseIn .9s cubic-bezier(.2,.7,.2,1) both}
+.line:nth-child(2)>span{animation-delay:.12s}
+.gradient{background:linear-gradient(100deg,var(--accent),var(--accent2),var(--accent));background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite}
 .hero-copy{font-size:1.08rem;max-width:620px;color:var(--muted)}
 .hero-copy strong{color:var(--ink);font-weight:600}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:var(--panel);font-weight:700;font-size:.9rem;transition:transform .2s,border-color .2s,background .2s}
 .btn:hover{transform:translateY(-3px);border-color:var(--accent)}
+.btn span{display:inline-block;transition:transform .2s}
+.btn:hover span{transform:translate(2px,-2px)}
 .btn.primary{background:var(--accent);color:#07140f;border-color:var(--accent)}
 .btn.primary:hover{filter:brightness(1.07)}
-.profile-card{position:relative;border:1px solid var(--line);border-radius:26px;padding:25px;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--panel2) 65%,var(--bg)));box-shadow:var(--shadow);transform:rotate(2deg);transition:transform .35s}
-.profile-card:hover{transform:rotate(0) translateY(-5px)}
+.profile-card{position:relative;border:1px solid var(--line);border-radius:26px;padding:25px;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--panel2) 65%,var(--bg)));box-shadow:var(--shadow);transform:perspective(900px) rotate(2deg) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s}
+.profile-card:hover{transform:perspective(900px) rotate(0) translateY(-5px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
 .profile-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
 .status{display:inline-flex;align-items:center;gap:8px;font: .75rem "DM Mono",monospace;color:var(--muted)}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:pulse 2s infinite}
 .card-symbol{height:130px;border-radius:18px;background:linear-gradient(135deg,#183c38,#1b2443);display:grid;place-items:center;overflow:hidden;position:relative}
 .card-symbol:before,.card-symbol:after{content:"";position:absolute;width:180px;height:180px;border:1px solid #7cf5cb55;border-radius:42%;animation:spin 18s linear infinite}
 .card-symbol:after{width:130px;height:130px;border-color:#a6b8ff88;animation-direction:reverse;animation-duration:12s}
-.symbol{font-size:3.2rem;color:#7cf5cb;z-index:1;font-weight:800;letter-spacing:-.1em}
+.symbol{font-size:3.2rem;color:#7cf5cb;z-index:1;font-weight:800;letter-spacing:-.1em;animation:float 4s ease-in-out infinite}
 .profile-card h3{font-size:1.25rem;margin:20px 0 4px}
 .profile-card p{font-size:.9rem;color:var(--muted);margin:0}
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
@@ -66,19 +77,21 @@ h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.07em;margin-b
 .info-panel h3{font-size:1rem;margin-bottom:12px}
 .info-panel p{color:var(--muted);margin-bottom:0}
 .skill-list{display:flex;flex-wrap:wrap;gap:8px}
-.skill{border:1px solid var(--line);background:var(--bg);padding:7px 10px;border-radius:9px;font-size:.78rem;color:var(--muted)}
+.skill{border:1px solid var(--line);background:var(--bg);padding:7px 10px;border-radius:9px;font-size:.78rem;color:var(--muted);transition:transform .2s,color .2s,border-color .2s}
+.skill:hover{transform:translateY(-3px);color:var(--ink);border-color:var(--accent)}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 28px}
 .chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:8px 13px;border-radius:999px;font-size:.82rem;transition:all .2s}
 .chip:hover{border-color:var(--accent);color:var(--ink)}
 .chip[aria-pressed=true]{background:var(--accent);color:#07140f;border-color:var(--accent);font-weight:700}
 .project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.project{display:flex;flex-direction:column;min-height:270px;padding:21px;border:1px solid var(--line);border-radius:18px;background:var(--panel);text-decoration:none;position:relative;overflow:hidden;transition:transform .25s,border-color .25s,background .25s}
-.project:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 100% 0,color-mix(in srgb,var(--accent) 10%,transparent),transparent 48%);opacity:0;transition:opacity .25s}
+.project{display:flex;flex-direction:column;min-height:270px;padding:21px;border:1px solid var(--line);border-radius:18px;background:var(--panel);text-decoration:none;position:relative;overflow:hidden;transition:transform .25s,border-color .25s,background .25s,opacity .65s ease}
+.project:before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,100%) var(--my,0),color-mix(in srgb,var(--accent) 14%,transparent),transparent 60%);opacity:0;transition:opacity .25s}
 .project:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--accent) 65%,var(--line));background:var(--panel2)}
 .project:hover:before{opacity:1}
 .project>*{position:relative}
 .project-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:23px}
-.project-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:var(--panel2);border:1px solid var(--line);font-size:1.1rem}
+.project-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:var(--panel2);border:1px solid var(--line);font-size:1.1rem;transition:transform .3s}
+.project:hover .project-icon{transform:rotate(-8deg) scale(1.08)}
 .project-domain{font: .65rem "DM Mono",monospace;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
 .project h3{font-size:1.08rem;line-height:1.35;letter-spacing:-.035em;margin-bottom:10px}
 .project p{font-size:.85rem;line-height:1.65;color:var(--muted);margin-bottom:20px}
@@ -90,6 +103,8 @@ h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.07em;margin-b
 .project-detail h3{font-size:1.8rem;letter-spacing:-.06em;margin:10px 0}
 .project-detail p,.project-detail li{color:var(--muted)}
 .project-detail ul{padding-left:20px}
+.project-detail li{animation:fadeUp .45s ease both}
+.project-detail li:nth-child(2){animation-delay:.06s}.project-detail li:nth-child(3){animation-delay:.12s}.project-detail li:nth-child(4){animation-delay:.18s}
 .detail-head{display:flex;justify-content:space-between;align-items:start;gap:15px}
 .close-detail{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:7px 12px}
 .detail-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
@@ -102,16 +117,23 @@ footer{padding:27px 0 35px;color:var(--muted);font-size:.8rem}
 footer a{color:var(--ink);text-decoration:none}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
+.project.reveal.visible:hover{transform:translateY(-6px)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes dropIn{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes riseIn{from{transform:translateY(105%)}to{transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes shimmer{to{background-position:-220% 0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.8)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:850px){.hero{grid-template-columns:1fr .7fr;gap:28px}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{min-height:520px}}
-@media(max-width:650px){.wrap{width:min(100% - 28px,1100px)}nav{height:64px;gap:15px}.brand{font-size:1.15rem}nav a.tab{font-size:.8rem}.nav-right .pill-button{padding:7px 9px}.hero{display:flex;flex-direction:column;align-items:stretch;padding:65px 0 55px;gap:35px;min-height:unset}.hero h1{font-size:clamp(3.2rem,15vw,5rem)}.profile-card{max-width:430px;transform:none;width:100%;align-self:center}.section-head{display:block}.section-head .lede{margin-top:10px}.about-grid{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}.project{min-height:230px}.contact-panel{display:block}.contact-panel .actions{margin-top:22px}.footer-inner{align-items:flex-start;flex-direction:column;gap:5px}}
+@media(max-width:650px){.wrap{width:min(100% - 28px,1100px)}nav{height:64px;gap:15px}.brand{font-size:1.15rem}nav a.tab{font-size:.8rem}.nav-right .pill-button{padding:7px 9px}.hero{display:flex;flex-direction:column;align-items:stretch;padding:65px 0 55px;gap:35px;min-height:unset}.hero h1{font-size:clamp(3.2rem,15vw,5rem)}.profile-card,.profile-card:hover{max-width:430px;transform:none;width:100%;align-self:center}.section-head{display:block}.section-head .lede{margin-top:10px}.about-grid{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}.project{min-height:230px}.contact-panel{display:block}.contact-panel .actions{margin-top:22px}.footer-inner{align-items:flex-start;flex-direction:column;gap:5px}}
 @media(max-width:390px){nav{gap:10px}.brand-mark{width:29px;height:29px}.brand{gap:7px}nav a.tab{font-size:.74rem}.nav-right .pill-button{font-size:.72rem}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.halo{display:none}}
 </style>
 </head>
 <body>
+<div id="progress" aria-hidden="true"></div>
 <header><div class="wrap"><nav aria-label="Main navigation">
 <a class="brand" href="#home"><span class="brand-mark">K</span>Kshitij</a>
 <a class="tab" href="#home" data-tab="home">Home</a><a class="tab" href="#projects" data-tab="projects">Projects</a><a class="tab" href="#about" data-tab="about">About</a><a class="tab" href="#contact" data-tab="contact">Contact</a>
@@ -151,19 +173,20 @@ const PROJECTS=[
 ];
 const DOMAINS=["All","AI / Agents","CV / Privacy","Mobile","Systems / DevOps","Full-Stack","Algorithms"];
 const $=s=>document.querySelector(s),app=$("#app");
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const tags=arr=>`<div class="tags">${arr.slice(0,5).map(x=>`<span class="tag">${esc(x)}</span>`).join("")}</div>`;
 const iconFor=d=>({"AI / Agents":"✳","CV / Privacy":"◉","Mobile":"▣","Systems / DevOps":"▥","Full-Stack":"↗","Algorithms":"⌘"}[d]||"◇");
 function projectCard(p){return `<a class="project reveal" href="#project=${encodeURIComponent(p.id)}"><div class="project-top"><span class="project-icon">${p.icon||iconFor(p.domain)}</span><span class="project-domain">${esc(p.domain)}</span></div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p>${tags(p.stack)}<span class="project-arrow">↗</span></a>`}
-function home(){app.innerHTML=`<section class="hero" id="home" style="border:0"><div class="reveal"><div class="eyebrow">Computer science · Mumbai, India</div><h1>Building things<br>that <span class="gradient">make sense.</span></h1><p class="hero-copy">Hey, I'm <strong>${esc(PROFILE.name)}</strong> — ${esc(PROFILE.intro)} ${esc(PROFILE.more)}</p><div class="actions"><a class="btn primary" href="#projects">Explore my work <span>↗</span></a><a class="btn" href="#contact">Get in touch</a></div></div><aside class="profile-card reveal"><div class="profile-top"><span class="status"><span class="dot"></span> Curious by default</span><span class="project-domain">PROFILE_001</span></div><div class="card-symbol"><span class="symbol">{k}</span></div><h3>Software, systems & AI</h3><p>Learning by building, debugging and shipping.</p><div class="stat-row"><div class="stat"><b>${PROJECTS.length}</b><span>Projects listed</span></div><div class="stat"><b>06</b><span>Core domains</span></div><div class="stat"><b>∞</b><span>Things to learn</span></div></div></aside></section>
-<section id="featured"><div class="section-head reveal"><div><div class="kicker">Selected work</div><h2>Some things I've built.</h2><p class="lede">A mix of practical tools, experiments and projects that helped me learn how the pieces fit together.</p></div><a class="btn" href="#projects">All projects ↗</a></div><div class="project-grid">${PROJECTS.slice(0,6).map(projectCard).join("")}</div></section>
+function home(){app.innerHTML=`<section class="hero" id="home" style="border:0"><canvas class="halo" aria-hidden="true"></canvas><div class="reveal"><div class="eyebrow">Computer science · Mumbai, India</div><h1><span class="line"><span>Building things</span></span><span class="line"><span>that <span class="gradient">make sense.</span></span></span></h1><p class="hero-copy">Hey, I'm <strong>${esc(PROFILE.name)}</strong> — ${esc(PROFILE.intro)} ${esc(PROFILE.more)}</p><div class="actions"><a class="btn primary" href="#projects">Explore my work <span>↗</span></a><a class="btn" href="#contact">Get in touch</a></div></div><aside class="profile-card reveal"><div class="profile-top"><span class="status"><span class="dot"></span> Curious by default</span><span class="project-domain">PROFILE_001</span></div><div class="card-symbol"><span class="symbol">{k}</span></div><h3>Software, systems & AI</h3><p>Learning by building, debugging and shipping.</p><div class="stat-row"><div class="stat"><b data-count="${PROJECTS.length}">${PROJECTS.length}</b><span>Projects listed</span></div><div class="stat"><b data-count="6">6</b><span>Core domains</span></div><div class="stat"><b>∞</b><span>Things to learn</span></div></div></aside></section>
+<section id="featured"><div class="section-head reveal"><div><div class="kicker">Selected work</div><h2>Some things I've built.</h2><p class="lede">A mix of practical tools, experiments and projects that helped me learn how the pieces fit together.</p></div><a class="btn" href="#projects">All projects <span>↗</span></a></div><div class="project-grid">${PROJECTS.slice(0,6).map(projectCard).join("")}</div></section>
 <section id="about"><div class="section-head reveal"><div><div class="kicker">A little about me</div><h2>Curiosity, then code.</h2><p class="lede">I enjoy projects where I can work across the stack and understand the system behind the interface.</p></div></div><div class="about-grid"><article class="info-panel reveal"><h3>What I’m exploring</h3><p>Applied AI and retrieval, privacy-aware browser tools, operating systems, backend development, automation and local-first software. I’m also learning more about DevOps and cloud workflows.</p></article><article class="info-panel reveal"><h3>Tools I use</h3><div class="skill-list">${["Python","C++","JavaScript","TypeScript","Kotlin","Flask","FastAPI","React","Docker","Prometheus","Grafana","OpenCV","scikit-learn","PostgreSQL","Git"].map(x=>`<span class="skill">${x}</span>`).join("")}</div></article></div></section>
-<section id="contact"><div class="contact-panel reveal"><div><div class="kicker">Have something in mind?</div><h2>Let's build something useful.</h2><p>Open to learning, collaborating and talking about interesting projects.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me ↗</a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub ↗</a></div></div></section>`}
+<section id="contact"><div class="contact-panel reveal"><div><div class="kicker">Have something in mind?</div><h2>Let's build something useful.</h2><p>Open to learning, collaborating and talking about interesting projects.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me <span>↗</span></a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub <span>↗</span></a></div></div></section>`}
 let activeFilter="All";
 function projectsPage(){const list=PROJECTS.filter(p=>activeFilter==="All"||p.domain===activeFilter);app.innerHTML=`<section id="projects" style="border-top:0"><div class="section-head reveal"><div><div class="kicker">The workbench</div><h2>Projects</h2><p class="lede">Browse projects by area. Open any card for a little more detail.</p></div><span class="project-domain">${list.length} PROJECTS</span></div><div class="filters" role="group" aria-label="Filter projects">${DOMAINS.map(d=>`<button class="chip" data-filter="${esc(d)}" aria-pressed="${d===activeFilter}">${esc(d)}</button>`).join("")}</div><div class="project-grid">${list.map(projectCard).join("")}</div></section>`;app.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{activeFilter=b.dataset.filter;projectsPage()});observeReveals();}
 function detailPage(id){const p=PROJECTS.find(x=>x.id===id);if(!p){home();return}app.innerHTML=`<section style="border-top:0"><a class="btn" href="#projects">← Back to projects</a><div class="project-detail"><div class="detail-head"><div><div class="kicker">${esc(p.domain)}${p.status?" · "+esc(p.status):""}</div><h3>${esc(p.title)}</h3></div><span class="project-icon">${p.icon||iconFor(p.domain)}</span></div><p>${esc(p.details)}</p><h4>What it includes</h4><ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join("")}</ul><h4>Tech stack</h4>${tags(p.stack)}<div class="detail-links">${p.github?`<a class="btn" href="${esc(p.github)}" target="_blank" rel="noopener">GitHub ↗</a>`:""}${p.live?`<a class="btn primary" href="${esc(p.live)}" target="_blank" rel="noopener">Live demo ↗</a>`:""}<span class="empty">${!p.github&&!p.live?"Add this project's repository or live demo URL in the PROJECTS data to show a link here.":""}</span></div></div></section>`}
-function contactPage(){app.innerHTML=`<section id="contact" style="border-top:0"><div class="contact-panel"><div><div class="kicker">Say hello</div><h2>Let's talk.</h2><p>For collaborations, project feedback or a good technical conversation.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me ↗</a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub ↗</a><a class="btn" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a></div></div></section>`}
-function route(){const hash=location.hash.slice(1)||"home";if(hash.startsWith("project=")){detailPage(decodeURIComponent(hash.slice(8)));setTab("projects")}else if(hash==="projects"){projectsPage();setTab("projects")}else if(hash==="about"){home();setTab("about");setTimeout(()=>$("#about")?.scrollIntoView(),0)}else if(hash==="contact"){contactPage();setTab("contact")}else{home();setTab("home")}document.title=(hash.startsWith("project=")?PROJECTS.find(p=>p.id===decodeURIComponent(hash.slice(8)))?.title+" — ":"")+"Kshitij — CS student & builder";window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});observeReveals()}
+function contactPage(){app.innerHTML=`<section id="contact" style="border-top:0"><div class="contact-panel"><div><div class="kicker">Say hello</div><h2>Let's talk.</h2><p>For collaborations, project feedback or a good technical conversation.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me <span>↗</span></a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub <span>↗</span></a><a class="btn" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">LinkedIn <span>↗</span></a></div></div></section>`}
+function route(){const hash=location.hash.slice(1)||"home";if(hash.startsWith("project=")){detailPage(decodeURIComponent(hash.slice(8)));setTab("projects")}else if(hash==="projects"){projectsPage();setTab("projects")}else if(hash==="about"){home();setTab("about");setTimeout(()=>$("#about")?.scrollIntoView(),0)}else if(hash==="contact"){contactPage();setTab("contact")}else{home();setTab("home")}document.title=(hash.startsWith("project=")?PROJECTS.find(p=>p.id===decodeURIComponent(hash.slice(8)))?.title+" — ":"")+"Kshitij — CS student & builder";window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});observeReveals();initHalo();initExtras()}
 function setTab(tab){document.querySelectorAll("[data-tab]").forEach(a=>a.toggleAttribute("aria-current",a.dataset.tab===tab))}
 addEventListener("hashchange",route);
 const root=document.documentElement,themeBtn=$("#theme");
@@ -172,8 +195,66 @@ let theme="dark";try{theme=localStorage.getItem("portfolio-theme")||"dark"}catch
 themeBtn.onclick=()=>setTheme(root.dataset.theme==="dark"?"light":"dark",true);
 $("#year").textContent=new Date().getFullYear();
 let revealObserver;
-function observeReveals(){if(revealObserver)revealObserver.disconnect();if("IntersectionObserver"in window){revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");revealObserver.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el))}else document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"))}
-route();
+function observeReveals(){if(revealObserver)revealObserver.disconnect();if("IntersectionObserver"in window){revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");revealObserver.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll(".reveal").forEach((el,i)=>{if(el.classList.contains("project"))el.style.transitionDelay=(i%3)*80+"ms";revealObserver.observe(el)})}else document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"))}
+
+/* Chroma Halo style cursor ink (hero only) */
+function initHalo(){
+  const c=document.querySelector(".halo");
+  if(!c||reduce)return;
+  const hero=c.parentElement,x=c.getContext("2d");
+  let w=0,h=0,tx=-1,ty=0,px=null,py=0,t=0;
+  const rgb=v=>{const s=getComputedStyle(document.documentElement).getPropertyValue(v).trim().replace("#","");
+    const n=parseInt(s.length===3?s.replace(/./g,"$&$&"):s,16);return[n>>16&255,n>>8&255,n&255]};
+  new ResizeObserver(()=>{const d=Math.min(devicePixelRatio||1,2),r=c.getBoundingClientRect();
+    w=r.width;h=r.height;c.width=w*d;c.height=h*d;x.setTransform(d,0,0,d,0,0)}).observe(c);
+  hero.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect();
+    tx=e.clientX-r.left;ty=e.clientY-r.top;if(px===null){px=tx;py=ty}});
+  hero.addEventListener("pointerleave",()=>{tx=-1});
+  (function loop(){
+    if(!c.isConnected)return;
+    x.globalCompositeOperation="destination-out";
+    x.fillStyle="rgba(0,0,0,.05)";x.fillRect(0,0,w,h);
+    x.globalCompositeOperation="source-over";
+    if(tx>=0&&px!==null){
+      const nx=px+(tx-px)*.12,ny=py+(ty-py)*.12,steps=Math.max(1,Math.ceil(Math.hypot(nx-px,ny-py)/10));
+      t+=.012;
+      const a=rgb("--accent"),b=rgb("--accent2"),k=(Math.sin(t)+1)/2;
+      const col=a.map((v,i)=>Math.round(v+(b[i]-v)*k)).join(",");
+      for(let i=1;i<=steps;i++){
+        const cx=px+(nx-px)*i/steps,cy=py+(ny-py)*i/steps,
+              g=x.createRadialGradient(cx,cy,0,cx,cy,150);
+        g.addColorStop(0,`rgba(${col},.09)`);g.addColorStop(1,`rgba(${col},0)`);
+        x.fillStyle=g;x.fillRect(cx-150,cy-150,300,300);
+      }
+      px=nx;py=ny;
+    }
+    requestAnimationFrame(loop);
+  })();
+}
+
+/* Extra motion: stat counters + profile card tilt */
+function initExtras(){
+  if(reduce)return;
+  document.querySelectorAll("[data-count]").forEach(el=>{
+    const n=+el.dataset.count;let s=null;
+    const step=ts=>{s??=ts;const p=Math.min((ts-s)/900,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1&&el.isConnected)requestAnimationFrame(step)};
+    el.textContent=0;requestAnimationFrame(step);
+  });
+  const card=document.querySelector(".profile-card");
+  if(card&&matchMedia("(hover:hover)").matches){
+    card.addEventListener("pointermove",e=>{const r=card.getBoundingClientRect();
+      card.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*10+"deg");
+      card.style.setProperty("--rx",(.5-(e.clientY-r.top)/r.height)*10+"deg")});
+    card.addEventListener("pointerleave",()=>{card.style.removeProperty("--rx");card.style.removeProperty("--ry")});
+  }
+}
+
+/* Project card spotlight + scroll progress (set up once) */
+app.addEventListener("pointermove",e=>{const p=e.target.closest&&e.target.closest(".project");if(p){const r=p.getBoundingClientRect();p.style.setProperty("--mx",e.clientX-r.left+"px");p.style.setProperty("--my",e.clientY-r.top+"px")}});
+const bar=$("#progress");
+function progress(){const m=document.documentElement.scrollHeight-innerHeight;bar.style.transform="scaleX("+(m>0?Math.min(scrollY/m,1):0)+")"}
+addEventListener("scroll",progress,{passive:true});addEventListener("resize",progress);
+route();progress();
 </script>
 </body>
-</html>f
+</html>
