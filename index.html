@@ -178,6 +178,81 @@ footer a{color:var(--ink);text-decoration:none}
 .totop{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:1.1rem;z-index:25;opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .3s,transform .3s,border-color .2s}
 .totop.show{opacity:1;pointer-events:auto;transform:none}
 .totop:hover{border-color:var(--accent);transform:translateY(-4px)}
+
+/* User-Friendly Bottom-Left Interactive Toolbar */
+.shortcut-bar {
+  position: fixed;
+  left: max(16px, env(safe-area-inset-left));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 14px;
+  box-shadow: var(--shadow);
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: Manrope, system-ui, sans-serif;
+  max-width: 260px;
+}
+.shortcut-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  font-family: "DM Mono", monospace;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.shortcut-bar-header button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.shortcut-bar-header button:hover {
+  color: var(--ink);
+}
+.shortcut-keys {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+.shortcut-key-btn {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.shortcut-key-btn:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+  background: var(--panel2);
+  transform: translateY(-1px);
+}
+.shortcut-key-btn kbd {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 1px 4px;
+  border-radius: 4px;
+  color: var(--accent);
+  font-family: "DM Mono", monospace;
+  font-weight: 700;
+}
+
 header{padding-top:env(safe-area-inset-top)}
 footer{padding-bottom:calc(35px + env(safe-area-inset-bottom))}
 nav a.tab{padding:8px 0}
@@ -191,7 +266,7 @@ nav a.tab:after{bottom:2px}
 @media(min-width:1400px){.wrap{width:min(1240px,calc(100% - 80px))}.project-grid{gap:18px}.hero{min-height:640px}}
 @media(max-width:1024px){.hero{gap:36px}.hero h1{font-size:clamp(3rem,7.5vw,5.4rem)}}
 @media(max-width:850px){section{padding:56px 0}.hero{padding:64px 0 56px}.section-head{gap:16px}.contact-panel{gap:20px}}
-@media(max-width:650px){section{padding:48px 0}.hero h1{font-size:clamp(2.5rem,12.5vw,4.4rem)}.hero-copy{font-size:1rem}.actions .btn{flex:1 1 auto}.chip{padding:9px 14px}.floaters span:nth-child(n+4){display:none}.stat-row{gap:8px}.typer{font-size:.85rem}.section-head .btn{margin-top:14px}.totop{width:42px;height:42px}}
+@media(max-width:650px){section{padding:48px 0}.hero h1{font-size:clamp(2.5rem,12.5vw,4.4rem)}.hero-copy{font-size:1rem}.actions .btn{flex:1 1 auto}.chip{padding:9px 14px}.floaters span:nth-child(n+4){display:none}.stat-row{gap:8px}.typer{font-size:.85rem}.section-head .btn{margin-top:14px}.totop{width:42px;height:42px}.shortcut-bar{display:none}}
 @media(max-width:480px){.brand-name{display:none}nav{gap:14px}.pill-button .tl{display:none}.pill-button{padding:8px 12px}.stat span{font-size:.62rem}.profile-card{padding:20px}.project{padding:18px;min-height:0}.info-panel{padding:20px}.contact-panel{padding:24px 20px}.hint{display:none}.nav-right{margin-left:auto}nav .brand{margin-right:0}}
 @media(max-width:340px){nav{gap:9px}nav a.tab{font-size:.68rem}.hero h1{font-size:2.3rem}}
 @media(max-height:500px) and (orientation:landscape){.hero{min-height:unset;padding:36px 0}}
@@ -203,13 +278,28 @@ nav a.tab:after{bottom:2px}
 <div id="progress" aria-hidden="true"></div>
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 <header><div class="wrap"><nav aria-label="Main navigation">
-<a class="brand" href="#home"><span class="brand-mark">K</span><span class="brand-name">Kshitij</span></a>
-<a class="tab" href="#home" data-tab="home">Home</a><a class="tab" href="#projects" data-tab="projects">Projects</a><a class="tab" href="#about" data-tab="about">About</a><a class="tab" href="#contact" data-tab="contact">Contact</a>
-<div class="nav-right"><button class="pill-button" id="theme" type="button" aria-label="Toggle colour theme">☼ Light</button></div>
+<a class="brand" href="#home" title="Go to Home section"><span class="brand-mark">K</span><span class="brand-name">Kshitij</span></a>
+<a class="tab" href="#home" data-tab="home" title="Navigate to Home">Home</a><a class="tab" href="#projects" data-tab="projects" title="Navigate to Projects">Projects</a><a class="tab" href="#about" data-tab="about" title="Navigate to About Me">About</a><a class="tab" href="#contact" data-tab="contact" title="Navigate to Contact">Contact</a>
+<div class="nav-right"><button class="pill-button" id="theme" type="button" aria-label="Toggle colour theme" title="Switch light/dark theme">☼ Light</button></div>
 </nav></div></header>
 <main class="wrap" id="app"></main>
-<footer><div class="wrap footer-inner"><span>Designed and built with HTML, CSS & JavaScript. <span class="hint" title="↑ ↑ ↓ ↓ ← → ← → B A">psst… try the Konami code.</span></span><span>© <span id="year"></span> Kshitij · <a href="#home">Back to top ↑</a></span></div></footer>
-<button class="totop" id="totop" type="button" aria-label="Back to top">↑</button>
+<footer><div class="wrap footer-inner"><span>Designed and built with HTML, CSS & JavaScript. <span class="hint" title="↑ ↑ ↓ ↓ ← → ← → B A">psst… try the Konami code.</span></span><span>© <span id="year"></span> Kshitij · <a href="#home" title="Scroll back to top">Back to top ↑</a></span></div></footer>
+
+<!-- Interactive User-Friendly Shortcut Toolbar -->
+<div class="shortcut-bar" id="shortcutBar">
+  <div class="shortcut-bar-header">
+    <span>Keyboard Nav</span>
+    <button type="button" id="closeShortcutBar" title="Hide shortcut bar" aria-label="Close shortcut bar">&times;</button>
+  </div>
+  <div class="shortcut-keys">
+    <button class="shortcut-key-btn" onclick="location.hash='#home'" title="Jump to Home">Home <kbd>H</kbd></button>
+    <button class="shortcut-key-btn" onclick="location.hash='#projects'" title="Jump to Projects">Projects <kbd>P</kbd></button>
+    <button class="shortcut-key-btn" onclick="location.hash='#about'" title="Jump to About">About <kbd>A</kbd></button>
+    <button class="shortcut-key-btn" onclick="location.hash='#contact'" title="Jump to Contact">Contact <kbd>C</kbd></button>
+  </div>
+</div>
+
+<button class="totop" id="totop" type="button" aria-label="Back to top" title="Scroll back to top of page">↑</button>
 <script>
 const PROFILE={
  name:"Kshitij",
@@ -225,7 +315,7 @@ const PROJECTS=[
 {id:"privacy-agent",title:"Privacy-preserving vision browser agent",domain:"CV / Privacy",icon:"◉",summary:"A browser extension that redacts personal data from screenshots before an AI model chooses the next action.",stack:["JavaScript","Python","FastAPI","Chrome MV3","Transformers.js","Ollama"],details:"Sensitive text and people are detected and redacted on-device so sanitised page context can be sent to a vision model.",features:["Detects email, phone and selected identity-number patterns","On-device people detection and screenshot redaction","Supports local Ollama and OpenAI-compatible model endpoints","Shows redacted regions, actions and latency"]},
 {id:"relay",title:"Relay — offline Bluetooth mesh messenger",domain:"Mobile",icon:"⌁",summary:"An Android messenger designed for nearby communication over Bluetooth LE, with Nostr messaging when online.",stack:["Kotlin","Jetpack Compose","BLE","Nostr","Room"],details:"A mobile app project focused on private peer-to-peer communication, with an offline-first approach.",features:["Multi-hop BLE mesh with duplicate suppression and acknowledgements","Encrypted private messages and signed identities","Nostr relays for internet messaging","Android Keystore and Room-backed history"]},
 {id:"gemini-chat",title:"Gemini AI chatbot",domain:"Mobile",icon:"✧",summary:"An Android chat app with saved conversations, voice input and a modern Compose interface.",stack:["Kotlin","Jetpack Compose","Gemini"],details:"A student Android project using MVVM, with separate ViewModels and repositories for app state and API calls.",features:["Multiple conversations saved across restarts","Voice input and light/dark themes","Input validation, error handling and retries","Camera and gallery experiments"]},
-{id:"lexai",title:"LexAI — Indian law chatbot",domain:"AI / Agents",icon:"§",summary:"A chatbot that explains questions about Indian law in plain language.",stack:["Python","FastAPI"],details:"A legal information chatbot project. Add your exact retrieval approach, data sources and evaluation method here before publishing.",features:["Plain-language legal information","Designed around common questions about Indian law"]},
+{id:"lexai",title:"LexAI — Indian law chatbot",domain:"AI / Agents",icon:"§",summary:"An chatbot that explains questions about Indian law in plain language.",stack:["Python","FastAPI"],details:"A legal information chatbot project. Add your exact retrieval approach, data sources and evaluation method here before publishing.",features:["Plain-language legal information","Designed around common questions about Indian law"]},
 {id:"codesentinel",title:"CodeSentinel — code intelligence for VS Code",domain:"AI / Agents",icon:"⌘",summary:"A local-first codebase search and review extension using retrieval and local models.",stack:["TypeScript","Node.js","Tree-sitter","Qdrant","Ollama"],details:"Designed to keep source code on the developer's machine. Semantic repository search is the initial focus; review and patch workflows are planned.",features:["Natural-language semantic search across repositories","AST-based parsing with Tree-sitter","Retrieval with Qdrant and local Ollama models","Planned: code review, security analysis and patch previews"],status:"In progress"},
 {id:"cybershield",title:"CyberShield AI",domain:"CV / Privacy",icon:"⌁",summary:"A browser extension that flags abusive and profane text using a local Flask API.",stack:["Python","scikit-learn","Flask","JavaScript","Chrome MV3"],details:"A TF-IDF word/character feature model with LinearSVC is combined with rule-based profanity checks, including Hinglish terms. The reported held-out test split scored about 93.5% F1; real-world webpages may differ.",features:["Rescans pages as content changes","Relaxed, Balanced and Strict sensitivity modes","Explains scores, thresholds and matched terms","Local feedback storage with JSON export"]},
 {id:"doc-scanner",title:"Smart Document Scanner",domain:"CV / Privacy",icon:"▧",summary:"Turns document photos into clean, flattened scans with classical image processing.",stack:["Python","OpenCV","NumPy"],details:"A local-first AI course group project using image processing rather than cloud services or deep learning.",features:["Contour-based corner detection and manual adjustment","Perspective correction and scan validation","Shadow reduction, CLAHE and colour analysis","Rule-based scan advisor"]},
@@ -248,15 +338,15 @@ const marquee=()=>{const r=TOOLS.map(x=>`<span class="skill">${x}</span>`).join(
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const tags=arr=>`<div class="tags">${arr.slice(0,5).map(x=>`<span class="tag">${esc(x)}</span>`).join("")}</div>`;
 const iconFor=d=>({"AI / Agents":"✳","CV / Privacy":"◉","Mobile":"▣","Systems / DevOps":"▥","Full-Stack":"↗","Algorithms":"⌘"}[d]||"◇");
-function projectCard(p){return `<a class="project reveal" href="#project=${encodeURIComponent(p.id)}"><div class="project-top"><span class="project-icon">${p.icon||iconFor(p.domain)}</span><span class="project-domain">${esc(p.domain)}</span></div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p>${tags(p.stack)}<span class="project-arrow">↗</span></a>`}
-function home(){app.innerHTML=`<section class="hero" id="home" style="border:0"><canvas class="halo" aria-hidden="true"></canvas><div class="floaters" aria-hidden="true"><span style="--d:.03;top:12%;left:48%">✳</span><span style="--d:-.05;top:72%;left:42%">⌘</span><span style="--d:.07;top:18%;right:1%">◇</span><span style="--d:-.03;bottom:6%;left:3%">▥</span><span style="--d:.05;top:46%;left:-1%">{ }</span></div><div class="reveal"><div class="eyebrow">Computer science · Mumbai, India</div><h1><span class="line"><span>Building things</span></span><span class="line"><span>that <span class="gradient">make sense.</span></span></span></h1><p class="hero-copy">Hey, I'm <strong>${esc(PROFILE.name)}</strong> — ${esc(PROFILE.intro)} ${esc(PROFILE.more)}</p><div class="typer" aria-label="Currently doing"><span class="pr">&gt;</span> <span id="typed"></span><i class="caret"></i></div><div class="actions"><a class="btn primary" href="#projects">Explore my work <span>↗</span></a><a class="btn" href="#contact">Get in touch</a></div></div><aside class="profile-card reveal"><div class="profile-top"><span class="status"><span class="dot"></span> Curious by default</span><span class="project-domain">PROFILE_001</span></div><div class="card-symbol"><span class="symbol">{k}</span></div><h3>Software, systems & AI</h3><p>Learning by building, debugging and shipping.</p><div class="stat-row"><div class="stat"><b data-count="${PROJECTS.length}">${PROJECTS.length}</b><span>Projects listed</span></div><div class="stat"><b data-count="6">6</b><span>Core domains</span></div><div class="stat"><b>∞</b><span>Things to learn</span></div></div></aside></section>
-${marquee()}<section id="featured"><div class="section-head reveal"><div><div class="kicker">Selected work</div><h2>Some things I've built.</h2><p class="lede">A mix of practical tools, experiments and projects that helped me learn how the pieces fit together.</p></div><a class="btn" href="#projects">All projects <span>↗</span></a></div><div class="project-grid">${PROJECTS.slice(0,6).map(projectCard).join("")}</div></section>
+function projectCard(p){return `<a class="project reveal" href="#project=${encodeURIComponent(p.id)}" title="View details for ${esc(p.title)}"><div class="project-top"><span class="project-icon">${p.icon||iconFor(p.domain)}</span><span class="project-domain">${esc(p.domain)}</span></div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p>${tags(p.stack)}<span class="project-arrow">↗</span></a>`}
+function home(){app.innerHTML=`<section class="hero" id="home" style="border:0"><canvas class="halo" aria-hidden="true"></canvas><div class="floaters" aria-hidden="true"><span style="--d:.03;top:12%;left:48%">✳</span><span style="--d:-.05;top:72%;left:42%">⌘</span><span style="--d:.07;top:18%;right:1%">◇</span><span style="--d:-.03;bottom:6%;left:3%">▥</span><span style="--d:.05;top:46%;left:-1%">{ }</span></div><div class="reveal"><div class="eyebrow">Computer science · Mumbai, India</div><h1><span class="line"><span>Building things</span></span><span class="line"><span>that <span class="gradient">make sense.</span></span></span></h1><p class="hero-copy">Hey, I'm <strong>${esc(PROFILE.name)}</strong> — ${esc(PROFILE.intro)} ${esc(PROFILE.more)}</p><div class="typer" aria-label="Currently doing"><span class="pr">&gt;</span> <span id="typed"></span><i class="caret"></i></div><div class="actions"><a class="btn primary" href="#projects" title="Explore project portfolio">Explore my work <span>↗</span></a><a class="btn" href="#contact" title="Jump to contact section">Get in touch</a></div></div><aside class="profile-card reveal" tabindex="0"><div class="profile-top"><span class="status"><span class="dot"></span> Curious by default</span><span class="project-domain">PROFILE_001</span></div><div class="card-symbol" tabindex="0" role="button" aria-label="Interactive card symbol" title="Click or press Enter for a visual burst"><span class="symbol">{k}</span></div><h3>Software, systems & AI</h3><p>Learning by building, debugging and shipping.</p><div class="stat-row"><div class="stat"><b data-count="${PROJECTS.length}">${PROJECTS.length}</b><span>Projects listed</span></div><div class="stat"><b data-count="6">6</b><span>Core domains</span></div><div class="stat"><b>∞</b><span>Things to learn</span></div></div></aside></section>
+${marquee()}<section id="featured"><div class="section-head reveal"><div><div class="kicker">Selected work</div><h2>Some things I've built.</h2><p class="lede">A mix of practical tools, experiments and projects that helped me learn how the pieces fit together.</p></div><a class="btn" href="#projects" title="View all listed projects">All projects <span>↗</span></a></div><div class="project-grid">${PROJECTS.slice(0,6).map(projectCard).join("")}</div></section>
 <section id="about"><div class="section-head reveal"><div><div class="kicker">A little about me</div><h2>Curiosity, then code.</h2><p class="lede">I enjoy projects where I can work across the stack and understand the system behind the interface.</p></div></div><div class="about-grid"><article class="info-panel reveal"><h3>What I’m exploring</h3><p>Applied AI and retrieval, privacy-aware browser tools, operating systems, backend development, automation and local-first software. I’m also learning more about DevOps and cloud workflows.</p></article><article class="info-panel reveal"><h3>Tools I use</h3><div class="skill-list">${TOOLS.map((x,i)=>`<span class="skill" style="--i:${i}">${x}</span>`).join("")}</div></article></div></section>
-<section id="contact"><div class="contact-panel reveal"><div><div class="kicker">Have something in mind?</div><h2>Let's build something useful.</h2><p>Open to learning, collaborating and talking about interesting projects.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me <span>↗</span></a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub <span>↗</span></a></div></div></section>`}
+<section id="contact"><div class="contact-panel reveal"><div><div class="kicker">Have something in mind?</div><h2>Let's build something useful.</h2><p>Open to learning, collaborating and talking about interesting projects.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}" title="Send me an email">Email me <span>↗</span></a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener" title="Visit my GitHub profile">GitHub <span>↗</span></a></div></div></section>`}
 let activeFilter="All";
-function projectsPage(){const list=PROJECTS.filter(p=>activeFilter==="All"||p.domain===activeFilter);app.innerHTML=`<section id="projects" style="border-top:0"><div class="section-head reveal"><div><div class="kicker">The workbench</div><h2>Projects</h2><p class="lede">Browse projects by area. Open any card for a little more detail.</p></div><span class="project-domain">${list.length} PROJECTS</span></div><div class="filters" role="group" aria-label="Filter projects">${DOMAINS.map(d=>`<button class="chip" data-filter="${esc(d)}" aria-pressed="${d===activeFilter}">${esc(d)}</button>`).join("")}</div><div class="project-grid">${list.map(projectCard).join("")}</div></section>`;app.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{activeFilter=b.dataset.filter;projectsPage()});observeReveals();}
-function detailPage(id){const p=PROJECTS.find(x=>x.id===id);if(!p){home();return}app.innerHTML=`<section style="border-top:0"><a class="btn" href="#projects">← Back to projects</a><div class="project-detail"><div class="detail-head"><div><div class="kicker">${esc(p.domain)}${p.status?" · "+esc(p.status):""}</div><h3>${esc(p.title)}</h3></div><span class="project-icon">${p.icon||iconFor(p.domain)}</span></div><p>${esc(p.details)}</p><h4>What it includes</h4><ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join("")}</ul><h4>Tech stack</h4>${tags(p.stack)}<div class="detail-links">${p.github?`<a class="btn" href="${esc(p.github)}" target="_blank" rel="noopener">GitHub ↗</a>`:""}${p.live?`<a class="btn primary" href="${esc(p.live)}" target="_blank" rel="noopener">Live demo ↗</a>`:""}<span class="empty">${!p.github&&!p.live?"Add this project's repository or live demo URL in the PROJECTS data to show a link here.":""}</span></div></div></section>`}
-function contactPage(){app.innerHTML=`<section id="contact" style="border-top:0"><div class="contact-panel"><div><div class="kicker">Say hello</div><h2>Let's talk.</h2><p>For collaborations, project feedback or a good technical conversation.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}">Email me <span>↗</span></a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">GitHub <span>↗</span></a><a class="btn" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">LinkedIn <span>↗</span></a></div></div></section>`}
+function projectsPage(){const list=PROJECTS.filter(p=>activeFilter==="All"||p.domain===activeFilter);app.innerHTML=`<section id="projects" style="border-top:0"><div class="section-head reveal"><div><div class="kicker">The workbench</div><h2>Projects</h2><p class="lede">Browse projects by area. Open any card for a little more detail.</p></div><span class="project-domain">${list.length} PROJECTS</span></div><div class="filters" role="group" aria-label="Filter projects">${DOMAINS.map(d=>`<button class="chip" data-filter="${esc(d)}" aria-pressed="${d===activeFilter}" title="Filter projects by ${esc(d)}">${esc(d)}</button>`).join("")}</div><div class="project-grid">${list.map(projectCard).join("")}</div></section>`;app.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{activeFilter=b.dataset.filter;projectsPage()});observeReveals();}
+function detailPage(id){const p=PROJECTS.find(x=>x.id===id);if(!p){home();return}app.innerHTML=`<section style="border-top:0"><a class="btn" href="#projects" title="Return to project list">← Back to projects</a><div class="project-detail"><div class="detail-head"><div><div class="kicker">${esc(p.domain)}${p.status?" · "+esc(p.status):""}</div><h3>${esc(p.title)}</h3></div><span class="project-icon">${p.icon||iconFor(p.domain)}</span></div><p>${esc(p.details)}</p><h4>What it includes</h4><ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join("")}</ul><h4>Tech stack</h4>${tags(p.stack)}<div class="detail-links">${p.github?`<a class="btn" href="${esc(p.github)}" target="_blank" rel="noopener" title="View repository on GitHub">GitHub ↗</a>`:""}${p.live?`<a class="btn primary" href="${esc(p.live)}" target="_blank" rel="noopener" title="Open live demo">Live demo ↗</a>`:""}<span class="empty">${!p.github&&!p.live?"Add this project's repository or live demo URL in the PROJECTS data to show a link here.":""}</span></div></div></section>`}
+function contactPage(){app.innerHTML=`<section id="contact" style="border-top:0"><div class="contact-panel"><div><div class="kicker">Say hello</div><h2>Let's talk.</h2><p>For collaborations, project feedback or a good technical conversation.</p></div><div class="actions"><a class="btn primary" href="mailto:${esc(PROFILE.email)}" title="Send me an email">Email me <span>↗</span></a><a class="btn" href="${esc(PROFILE.github)}" target="_blank" rel="noopener" title="Visit my GitHub profile">GitHub <span>↗</span></a><a class="btn" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener" title="Connect on LinkedIn">LinkedIn <span>↗</span></a></div></div></section>`}
 function route(){const hash=location.hash.slice(1)||"home";if(hash.startsWith("project=")){detailPage(decodeURIComponent(hash.slice(8)));setTab("projects")}else if(hash==="projects"){projectsPage();setTab("projects")}else if(hash==="about"){home();setTab("about");setTimeout(()=>$("#about")?.scrollIntoView(),0)}else if(hash==="contact"){contactPage();setTab("contact")}else{home();setTab("home")}document.title=(hash.startsWith("project=")?PROJECTS.find(p=>p.id===decodeURIComponent(hash.slice(8)))?.title+" — ":"")+"Kshitij — CS student & builder";window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});app.classList.remove("page-in");void app.offsetWidth;app.classList.add("page-in");observeReveals();initHalo();initExtras()}
 function setTab(tab){document.querySelectorAll("[data-tab]").forEach(a=>a.toggleAttribute("aria-current",a.dataset.tab===tab))}
 addEventListener("hashchange",route);
@@ -344,6 +434,29 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
 totop.onclick=()=>scrollTo({top:0,behavior:reduce?"auto":"smooth"});
 const KON=["arrowup","arrowup","arrowdown","arrowdown","arrowleft","arrowright","arrowleft","arrowright","b","a"];let ki=0;
 addEventListener("keydown",e=>{const k=e.key.toLowerCase();ki=k===KON[ki]?ki+1:(k===KON[0]?1:0);if(ki===KON.length){ki=0;root.classList.toggle("party");toast(root.classList.contains("party")?"party mode on 🎉":"party mode off");burst(innerWidth/2,innerHeight/3)}});
+
+/* --- Enhanced Keyboard Navigation & Shortcuts --- */
+addEventListener("keydown", (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  const key = e.key.toLowerCase();
+  if (key === 'h') location.hash = '#home';
+  if (key === 'p') location.hash = '#projects';
+  if (key === 'a') location.hash = '#about';
+  if (key === 'c') location.hash = '#contact';
+  
+  if (e.key === 'Enter' && e.target.classList.contains('card-symbol')) {
+    const r = e.target.getBoundingClientRect();
+    burst(r.left + r.width/2, r.top + r.height/2);
+  }
+});
+
+// Close shortcut bar functionality
+const shortcutBar = $("#shortcutBar");
+const closeShortcutBar = $("#closeShortcutBar");
+if(closeShortcutBar && shortcutBar) {
+  closeShortcutBar.onclick = () => shortcutBar.style.display = 'none';
+}
+
 let savedTitle=document.title;document.addEventListener("visibilitychange",()=>{if(document.hidden){savedTitle=document.title;document.title="Come back, I made snacks 🍪"}else document.title=savedTitle});
 route();progress();
 </script>
